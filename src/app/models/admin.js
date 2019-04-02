@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const database = require('../database');
 
 module.exports = database.sequelize.define(
-    'client',
+    'admin',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -13,9 +13,6 @@ module.exports = database.sequelize.define(
             type: Sequelize.STRING
         },
         last_name: {
-            type: Sequelize.STRING
-        },
-        phone: {
             type: Sequelize.STRING
         },
         email: {
