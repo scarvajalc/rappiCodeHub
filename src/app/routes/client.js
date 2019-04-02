@@ -1,6 +1,7 @@
 const express = require('express');
 const clients = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Client = require('../models/client');
 
 clients.post('/register', (req, res) => {
@@ -39,5 +40,27 @@ clients.post('/register', (req, res) => {
     });
 });
 
+clients.post('/login', (req, res) => {
+    Client.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+    .then(client => {
+        if(client){
+            if(bcrypt.compareSync(req.body.password, client.password)){
+                let token = jwt.sign(client.dataValues, process.env.SECRET_KEY, {
+                    expiresIn: 1500
+                });
+                res.send(token);
+            }
+        } else {
+            res.status(400).json({error: `Client does not exist`})
+        };
+    })
+    .catch(err => {
+        res.status(400).json({ error: err})
+    });
+});
 
 module.exports = clients;
