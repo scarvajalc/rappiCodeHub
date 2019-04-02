@@ -9,9 +9,10 @@ app.get('/', function (req, res) {
   res.send('Rappi tiembla con esta nueva aplicación');
 });
 
-
 const Clients = require('./src/app/routes/client');
+const Admins = require('./src/app/routes/admin');
 app.use('/clients', Clients);
+app.use('/admins', Admins);
 
 if (module === require.main) {
   // [START server]
