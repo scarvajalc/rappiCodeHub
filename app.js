@@ -5,6 +5,7 @@ const path = require('path');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'src/public')));
 
 app.get('/', function (req, res) {
   res.render('index');
@@ -19,6 +20,7 @@ app.use('/rappitenderos', Rappitenderos);
 
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
+
 
 if (module === require.main) {
   // [START server]
