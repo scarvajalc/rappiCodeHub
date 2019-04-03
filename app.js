@@ -11,8 +11,10 @@ app.get('/', function (req, res) {
 
 const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
+const Rappitenderos = require('./src/app/routes/rappitendero');
 app.use('/clients', Clients);
 app.use('/admins', Admins);
+app.use('/rappitenderos', Rappitenderos);
 
 if (module === require.main) {
   // [START server]
