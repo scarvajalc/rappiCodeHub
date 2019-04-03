@@ -1,17 +1,24 @@
 var express = require('express');
 var app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', function (req, res) {
-  res.send('Rappi tiembla con esta nueva aplicación');
+  res.render('index');
 });
 
-
 const Clients = require('./src/app/routes/client');
+const Admins = require('./src/app/routes/admin');
+const Rappitenderos = require('./src/app/routes/rappitendero');
 app.use('/clients', Clients);
+app.use('/admins', Admins);
+app.use('/rappitenderos', Rappitenderos);
+
+app.set('views', path.join(__dirname, 'src/views'));
+app.set('view engine', 'ejs');
 
 if (module === require.main) {
   // [START server]
