@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'src/public')));
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('clientRegister');
 });
 
 const Clients = require('./src/app/routes/client');
