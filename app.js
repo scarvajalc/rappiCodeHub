@@ -7,9 +7,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'src/public')));
 
-app.get('/', function (req, res) {
-  res.render('clientRegister');
+app.get('/clientIndex', function (req, res) {
+  res.render('clientIndex');
 });
+
+app.get('/clientRegister', function(req, res){
+  res.render('clientRegister');
+})
 
 const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
