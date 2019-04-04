@@ -23,6 +23,11 @@ app.get('/adminIndex', function (req, res){
   res.render('adminIndex');
 });
 
+app.get('/adminLogin', function (req, res){
+  res.render('adminLogin');
+});
+
+
 const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
 const Rappitenderos = require('./src/app/routes/rappitendero');
