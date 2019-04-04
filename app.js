@@ -13,7 +13,11 @@ app.get('/clientIndex', function (req, res) {
 
 app.get('/clientRegister', function(req, res){
   res.render('clientRegister');
-})
+});
+
+app.get('/clientLogin', function(req, res){
+  res.render('clientLogin');
+});
 
 const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
