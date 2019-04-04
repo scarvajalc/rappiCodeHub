@@ -5,10 +5,15 @@ const path = require('path');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'src/public')));
 
-app.get('/', function (req, res) {
-  res.render('index');
+app.get('/clientIndex', function (req, res) {
+  res.render('clientIndex');
 });
+
+app.get('/clientRegister', function(req, res){
+  res.render('clientRegister');
+})
 
 const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
@@ -19,6 +24,7 @@ app.use('/rappitenderos', Rappitenderos);
 
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
+
 
 if (module === require.main) {
   // [START server]
