@@ -13,4 +13,13 @@ const handleHTTPRegister = (req) => {
     return clientData;
 };
 
-module.exports = handleHTTPRegister;
+const handleHTTPLogin = (req) => {
+    const clientData = {
+        email: req.body.email,
+        password: req.body.password
+    };
+
+    return clientData;
+};
+
+module.exports = {handleHTTPRegister, handleHTTPLogin};
