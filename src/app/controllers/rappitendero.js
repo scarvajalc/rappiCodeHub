@@ -7,7 +7,7 @@ const rappiTenderoController = {
         repository.rappiTenderoLogin(rappiTenderoData, res);
     },
 
-    clientRegister(req, res) {
+    rappiTenderoRegister(req, res) {
         const rappiTenderoData = rappiTenderoHandler.handleHTTPRegister(req);
         repository.rappiTenderoRegister(rappiTenderoData, res);
     }

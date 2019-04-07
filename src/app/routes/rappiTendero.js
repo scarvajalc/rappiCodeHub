@@ -1,13 +1,19 @@
-const express = require('express');
-const rappiTenderos = express.Router();
 const rappiTenderoController = require('../controllers/rappiTendero');
 
-rappiTenderos.post('/login', (req, res) => {
-    rappiTenderoController.rappiTenderoLogin(req, res);
-});
+module.exports = (app) => {
+    app.get('/rappiTenderoIndex', (req, res) => {
+        res.render('rappiTenderoIndex');
+    });
 
-rappiTenderos.post('/register', (req, res) => {
-    rappiTenderoController.rappiTenderoRegister(req, res);
-});
+    app.get('/rappiTenderoLogin', function (req, res) {
+        res.render('rappiTenderoLogin');
+    });
 
-module.exports = rappiTenderos;
+    app.post('/rappiTenderos/login', (req, res) => {
+        rappiTenderoController.rappiTenderoLogin(req, res);
+    });
+
+    app.post('/rappiTenderos/register', (req, res) => {
+        rappiTenderoController.rappiTenderoRegister(req, res);
+    });
+};

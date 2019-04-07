@@ -4,48 +4,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'src/public')));
 
-app.get('/clientIndex', function (req, res) {
-  res.render('clientIndex');
-});
-
-app.get('/clientRegister', function(req, res){
-  res.render('clientRegister');
-});
-
-app.get('/clientLogin', function(req, res){
-  res.render('clientLogin');
-});
-
-app.get('/adminIndex', function (req, res){
-  res.render('adminIndex');
-});
-
-app.get('/adminLogin', function (req, res){
-  res.render('adminLogin');
-});
-
-app.get('/rappiTenderoIndex', function (req, res){
-  res.render('rappiTenderoIndex');
-});
-
-app.get('/rappiTenderoLogin', function (req, res){
-  res.render('rappiTenderoLogin');
-});
-
-const Clients = require('./src/app/routes/client');
-const Admins = require('./src/app/routes/admin');
-const Rappitenderos = require('./src/app/routes/rappitendero');
-
-app.use('/clients', Clients);
-app.use('/admins', Admins);
-app.use('/rappitenderos', Rappitenderos);
+require('./src/app/routes/client')(app);
+require('./src/app/routes/admin')(app);
+require('./src/app/routes/rappiTendero')(app);
 
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
-
 
 if (module === require.main) {
   // [START server]
