@@ -1,7 +1,7 @@
-const clientHandler = {
+const rappiTenderoHandler = {
     handleHTTPRegister(req) {
         const today = new Date();
-        const clientData = {
+        const rappiTenderoData = {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             phone: req.body.phone,
@@ -11,17 +11,17 @@ const clientHandler = {
             active: true
         };
 
-        return clientData;
+        return rappiTenderoData;
     },
 
     handleHTTPLogin(req) {
-        const clientData = {
+        const rappiTenderoData = {
             email: req.body.email,
             password: req.body.password
         };
 
-        return clientData;
+        return rappiTenderoData;
     }
 }
 
-module.exports = clientHandler;
+module.exports = rappiTenderoHandler;

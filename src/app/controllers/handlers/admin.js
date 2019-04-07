@@ -1,10 +1,13 @@
-const handleHTTPLogin = (req) => {
-    const adminData = {
-        email: req.body.email,
-        password: req.body.password
-    };
+const adminHandler = {
+    handleHTTPLogin(req) {
+        const adminData = {
+            email: req.body.email,
+            password: req.body.password
+        };
 
-    return adminData;
-};
+        return adminData;
+    }
+}
 
-module.exports = handleHTTPLogin;
+
+module.exports = adminHandler;

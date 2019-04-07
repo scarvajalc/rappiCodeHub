@@ -1,12 +1,11 @@
-const express = require('express');
-const admins = express.Router();
+const adminHandler = require('./handlers/admin');
+const repository = require('../repository/index');
 
-const handleHTTPLogin = require('../controllers/handlers/admin');
-const { adminLogin } = require('../repository/index');
+const adminController = {
+    adminLogin(req, res){
+        const adminData = adminHandler.handleHTTPLogin(req);
+        repository.adminLogin(adminData, res);
+    }
+}
 
-admins.post('/login', (req, res) => {
-    const adminData = handleHTTPLogin(req);
-    adminLogin(adminData, res)
-});
-
-module.exports = admins;
+module.exports = adminController;

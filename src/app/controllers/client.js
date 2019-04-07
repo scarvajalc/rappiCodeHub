@@ -1,17 +1,17 @@
-const express = require('express');
-const clients = express.Router();
+const clientHandler = require('./handlers/client');
+const repository = require('../repository/index');
 
-const { handleHTTPRegister, handleHTTPLogin } = require('../controllers/handlers/client');
-const { registerClient, clientLogin } = require('../repository/index');
- 
-clients.post('/register', (req, res) => {
-    const clientData = handleHTTPRegister(req);
-    registerClient(clientData, res);
-});
+const clientController = {
+    clientLogin(req, res) {
+        const clientData = clientHandler.handleHTTPLogin(req);
+        repository.clientLogin(clientData, res);
+    },
 
-clients.post('/login', (req, res) => {
-    const clientData = handleHTTPLogin(req);
-    clientLogin(clientData, res);
-});
+    clientRegister(req, res) {
+        const clientData = clientHandler.handleHTTPRegister(req);
+        repository.clientRegister(clientData, res);
+    }
 
-module.exports = clients;
+}
+
+module.exports = clientController;
