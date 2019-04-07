@@ -1,25 +1,27 @@
-const handleHTTPRegister = (req) => {
-    const today = new Date();
-    const clientData = {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        phone: req.body.phone,
-        email: req.body.email,
-        password: req.body.password,
-        createdAt: today,
-        active: true
-    };
+const clientHandler = {
+    handleHTTPRegister(req) {
+        const today = new Date();
+        const clientData = {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            phone: req.body.phone,
+            email: req.body.email,
+            password: req.body.password,
+            createdAt: today,
+            active: true
+        };
 
-    return clientData;
-};
+        return clientData;
+    },
 
-const handleHTTPLogin = (req) => {
-    const clientData = {
-        email: req.body.email,
-        password: req.body.password
-    };
+    handleHTTPLogin(req) {
+        const clientData = {
+            email: req.body.email,
+            password: req.body.password
+        };
 
-    return clientData;
-};
+        return clientData;
+    }
+}
 
-module.exports = {handleHTTPRegister, handleHTTPLogin};
+module.exports = clientHandler;

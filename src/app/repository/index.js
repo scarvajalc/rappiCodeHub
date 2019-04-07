@@ -27,7 +27,7 @@ const repository = {
             });
     },
 
-    registerClient(clientData, res) {
+    clientRegister(clientData, res) {
         Client.findOne({
             where: {
                 email: clientData.email
