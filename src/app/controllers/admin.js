@@ -1,9 +1,11 @@
-const handleHTTPLogin = require('../controllers/handlers/admin');
-const { adminLogin } = require('../repository/index');
+const adminHandler = require('./handlers/admin');
+const repository = require('../repository/index');
 
-const adminLoginController = (req, res) => {
-    const adminData = handleHTTPLogin(req);
-    adminLogin(adminData, res)
-};
+const adminController = {
+    adminLogin(req, res){
+        const adminData = adminHandler.handleHTTPLogin(req);
+        repository.adminLogin(adminData, res);
+    }
+}
 
-module.exports = adminLoginController;
+module.exports = adminController;
