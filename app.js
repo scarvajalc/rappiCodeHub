@@ -35,9 +35,9 @@ app.get('/rappiTenderoLogin', function (req, res){
   res.render('rappiTenderoLogin');
 });
 
-const Clients = require('./src/app/controllers/client');
+const Clients = require('./src/app/routes/client');
 const Admins = require('./src/app/routes/admin');
-const Rappitenderos = require('./src/app/controllers/rappitendero');
+const Rappitenderos = require('./src/app/routes/rappitendero');
 
 app.use('/clients', Clients);
 app.use('/admins', Admins);
