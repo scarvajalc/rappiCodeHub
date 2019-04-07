@@ -1,13 +1,23 @@
-const express = require('express');
-const clients = express.Router();
 const clientController = require('../controllers/client');
 
-clients.post('/login', (req, res) => {
-    clientController.clientLogin(req, res);
-});
+module.exports = (app) => {
+    app.get('/clientIndex', (req, res) => {
+        res.render('clientIndex');
+    });
 
-clients.post('/register', (req, res) => {
-    clientController.clientRegister(req, res);
-});
+    app.get('/clientRegister', function (req, res) {
+        res.render('clientRegister');
+    });
 
-module.exports = clients;
+    app.get('/clientLogin', function (req, res) {
+        res.render('clientLogin');
+    });
+
+    app.post('/clients/login', (req, res) => {
+        clientController.clientLogin(req, res);
+    });
+
+    app.post('/clients/register', (req, res) => {
+        clientController.clientRegister(req, res);
+    });
+};
