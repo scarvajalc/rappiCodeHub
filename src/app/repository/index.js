@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const repository = {
     adminLogin(adminData, res) {
-        Admin.findOne({
+        return Admin.findOne({
             where: {
                 email: adminData.email
             }
@@ -17,19 +17,19 @@ const repository = {
                         let token = jwt.sign(admin.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        res.send(token);
+                        return { validCredentials: true, adminData: admin }
                     }
                 } else {
-                    res.status(400).json({ error: `Admin does not exist` })
+                    return { validCredentials: false, message: 'Admin does not exists' }
                 };
             })
             .catch(err => {
-                res.status(400).json({ error: err })
+                return { error: err }
             });
     },
 
     clientRegister(clientData, res) {
-        Client.findOne({
+        return Client.findOne({
             where: {
                 email: clientData.email
             }
@@ -40,21 +40,21 @@ const repository = {
                         clientData.password = hash;
                         Client.create(clientData)
                             .then(client => {
-                                res.json({ status: `${client.email} registered` })
+                                return { message: `${client.email} registered` }
                             })
                             .catch(err => {
-                                res.send(`Error ${err}`)
+                                return { error: err }
                             });
                     });
                 };
             })
             .catch(err => {
-                res.send(`Error ${err}`)
+                return { error: err }
             });
     },
 
     clientLogin(clientData, res) {
-        Client.findOne({
+        return Client.findOne({
             where: {
                 email: clientData.email
             }
@@ -65,19 +65,19 @@ const repository = {
                         let token = jwt.sign(client.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        res.send(token);
+                        return { validCredentials: true, clientData: client }
                     }
                 } else {
-                    res.status(400).json({ error: `Client does not exist` })
+                    return { validCredentials: false, message: 'Client does not exists' }
                 };
             })
             .catch(err => {
-                res.status(400).json({ error: err })
+                return { error: err }
             });
     },
 
     rappiTenderoRegister(rappiTenderoData, res) {
-        RappiTendero.findOne({
+        return RappiTendero.findOne({
             where: {
                 email: rappiTenderoData.email
             }
@@ -88,21 +88,21 @@ const repository = {
                         rappiTenderoData.password = hash;
                         RappiTendero.create(rappiTenderoData)
                             .then(client => {
-                                res.json({ status: `${rappiTendero.email} registered` })
+                                return { message: `${rappiTendero.email} registered` }
                             })
                             .catch(err => {
-                                res.send(`Error ${err}`)
+                                return { error: err }
                             });
                     });
                 };
             })
             .catch(err => {
-                res.send(`Error ${err}`)
+                return { error: err }
             });
     },
 
     rappiTenderoLogin(rappiTenderoData, res) {
-        RappiTendero.findOne({
+        return RappiTendero.findOne({
             where: {
                 email: rappiTenderoData.email
             }
@@ -113,14 +113,14 @@ const repository = {
                         let token = jwt.sign(rappiTendero.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        res.send(token);
+                        return { validCredentials: true, rappiTenderoData: rappiTendero }
                     }
                 } else {
-                    res.status(400).json({ error: `RappiTendero does not exist` })
+                    return { message: 'RappiTendero does not exist' }
                 };
             })
             .catch(err => {
-                res.status(400).json({ error: err })
+                return { error: err }
             });
     }
 }
