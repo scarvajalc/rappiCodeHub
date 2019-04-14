@@ -1,10 +1,16 @@
 const clientHandler = require('./handlers/client');
 const repository = require('../repository/index');
 
-const clientController = {
-    clientLogin(req, res) {
+const clientController  = {
+    async clientLogin(req, res) {
         const clientData = clientHandler.handleHTTPLogin(req);
-        repository.clientLogin(clientData, res);
+        const repoResponse = await repository.clientLogin(clientData, res);
+        if(repoResponse.validCredentials){
+            req.session.user = repoResponse.clientData;
+            res.redirect("/clientHome")
+        } else {
+            res.redirect('clientLogin')
+        }
     },
 
     clientRegister(req, res) {
