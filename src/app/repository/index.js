@@ -29,24 +29,9 @@ const repository = {
     },
 
     clientRegister(clientData, res) {
-        return Client.findOne({
-            where: {
-                email: clientData.email
-            }
-        })
+        return Client.create(clientData)
             .then(client => {
-                if (!client) {
-                    bcrypt.hash(clientData.password, 10, (err, hash) => {
-                        clientData.password = hash;
-                        Client.create(clientData)
-                            .then(client => {
-                                return { message: `${client.email} registered` }
-                            })
-                            .catch(err => {
-                                return { error: err }
-                            });
-                    });
-                };
+                return { message: `${client.email} registered` }
             })
             .catch(err => {
                 return { error: err }
