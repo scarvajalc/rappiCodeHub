@@ -20,4 +20,14 @@ module.exports = (app) => {
     app.post('/clients/register', (req, res) => {
         clientController.clientRegister(req, res);
     });
+
+    app.get('/clientHome', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.render('clientHome', {
+                clientName: req.session.user.first_name
+            })
+        } else {
+            res.redirect('clientLogin');
+        }
+    })
 };

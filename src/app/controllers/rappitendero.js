@@ -2,14 +2,23 @@ const rappiTenderoHandler = require('./handlers/rappiTendero');
 const repository = require('../repository/index');
 
 const rappiTenderoController = {
-    rappiTenderoLogin(req, res) {
+    async rappiTenderoLogin(req, res) {
         const rappiTenderoData = rappiTenderoHandler.handleHTTPLogin(req);
-        repository.rappiTenderoLogin(rappiTenderoData, res);
+        const repoResponse = await repository.rappiTenderoLogin(rappiTenderoData, res);
+        if (repoResponse.validCredentials) {
+            req.session.user = repoResponse.rappiTenderoData;
+            res.redirect("/rappiTenderoHome");
+        } else {
+            res.redirect('rappiTenderoLogin');
+        }
     },
 
-    rappiTenderoRegister(req, res) {
-        const rappiTenderoData = rappiTenderoHandler.handleHTTPRegister(req);
-        repository.rappiTenderoRegister(rappiTenderoData, res);
+    async rappiTenderoRegister(req, res) {
+        const rappiTenderoData = await rappiTenderoHandler.handleHTTPRegister(req);
+        const repoResponse = repository.rappiTenderoRegister(rappiTenderoData, res);
+        if (repoResponse.message) {
+            res.redirect('/rappiTenderoLogin');
+        };
     }
 
 }

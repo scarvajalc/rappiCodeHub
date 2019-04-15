@@ -1,22 +1,30 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  key: 'user_sid',
-  secret: 'somerandonstuffs',
+  key: 'id',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-      expires: 600000
+    expires: 600000
   }
 }));
+
+app.use((req, res, next) => {
+  if (req.cookies.id && !req.session.user) {
+    res.clearCookie('id');
+  }
+  next();
+});
 
 app.use(express.static(path.join(__dirname, 'src/public')));
 

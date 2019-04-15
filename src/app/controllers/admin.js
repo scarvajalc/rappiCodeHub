@@ -2,9 +2,15 @@ const adminHandler = require('./handlers/admin');
 const repository = require('../repository/index');
 
 const adminController = {
-    adminLogin(req, res){
+    async adminLogin(req, res) {
         const adminData = adminHandler.handleHTTPLogin(req);
-        repository.adminLogin(adminData, res);
+        const repoResponse = await repository.adminLogin(adminData, res);
+        if (repoResponse.validCredentials) {
+            req.session.user = repoResponse.adminData;
+            res.redirect("/adminHome");
+        } else {
+            res.redirect("adminLogin");
+        }
     }
 }
 
