@@ -101,7 +101,7 @@ const repository = {
                         return { validCredentials: true, rappiTenderoData: rappiTendero }
                     }
                 } else {
-                    return { message: 'RappiTendero does not exist' }
+                    return { validCredentials: false, message: 'RappiTendero does not exist' }
                 };
             })
             .catch(err => {
