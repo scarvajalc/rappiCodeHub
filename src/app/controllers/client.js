@@ -15,8 +15,8 @@ const clientController = {
 
     async clientRegister(req, res) {
         const clientData = clientHandler.handleHTTPRegister(req);
-        const repoReponse = await repository.clientRegister(clientData, res);
-        if (repoReponse.message) {
+        const repoResponse = await repository.clientRegister(clientData, res);
+        if (repoResponse.message) {
             res.redirect('/clientLogin');
         };
     }
