@@ -1,21 +1,33 @@
 const Sequelize = require('sequelize');
 const database = require('../database');
-const Productsshoppingcart = require('../models/productsshoppingcart');
 const ShoppingCart = require('../models/shoppingcart');
+const ProductTest = require('../models/producttest')
 
-var ProductTest = database.sequelize.define(
-    'producttest',
+var Productsshoppingcart = database.sequelize.define(
+    'productsshoppingcarts',
     {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
-            type: Sequelize.STRING
+        
+        sc_id: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'shoppingcarts',
+                key: 'id'
+            }
         },
-        price: {
-            type: Sequelize.REAL
+        product_id: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'producttests', //CHANGE HERE
+                key: 'id'
+            }
+        },
+        ammount: {
+            type: sequelize.INTEGER
         },
         createdAt: {
             type: Sequelize.DATE,
@@ -36,9 +48,4 @@ var ProductTest = database.sequelize.define(
     }
 )
 
-ProductTest.belongsToMany(ShoppingCart, {
-    through: 'Productsshoppingcart',
-    as: 'shoppingcarts',
-    foreignKey: 'sc_id'
-  });
-module.exports = ProductTest
+module.exports = Productsshoppingcart

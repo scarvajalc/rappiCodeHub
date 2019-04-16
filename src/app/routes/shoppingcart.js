@@ -2,7 +2,7 @@ const shoppingCartController = require('../controllers/shoppingcart');
 
 module.exports = (app) => {
     app.get('/test', (req, res) => {
-        res.send('Hola Mundo');
+        shoppingCartController.showCart(req, res);
     });
 
     /*app.get('/clientRegister', function (req, res) {
