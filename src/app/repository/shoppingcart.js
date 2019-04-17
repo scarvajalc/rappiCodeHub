@@ -9,13 +9,13 @@ const sprepository = {
                 id: 1
             }
         }).then(cart =>{
-            console.log("cart=", cart.getClient());
+            console.log("cart=", cart);
+            //res.send(cart)
+            cart.getProducts().then(products =>{
+                console.log("cart=", products);
+                res.send(products)
+            })
             
-            cart.getClient().then(client =>{
-                res.send(client)
-            }
-
-            )
         })
     }
     /*adminLogin(adminData, res) {

@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize');
 const database = require('../database');
-const ShoppingCart = require('../models/shoppingcart');
-const ProductTest = require('../models/producttest')
+
 
 var Productsshoppingcart = database.sequelize.define(
-    'productsshoppingcarts',
+    'productsshoppingcart',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -27,7 +26,7 @@ var Productsshoppingcart = database.sequelize.define(
             }
         },
         ammount: {
-            type: sequelize.INTEGER
+            type: Sequelize.INTEGER
         },
         createdAt: {
             type: Sequelize.DATE,

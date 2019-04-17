@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const database = require('../database');
 const Client = require('../models/client');
 const Productsshoppingcart = require('../models/productsshoppingcart');
-const ProductTest = require('../models/productsshoppingcart'); //CHANGE HERE
+const ProductTest = require('../models/producttest'); //CHANGE HERE
 
 var ShoppingCart = database.sequelize.define(
     'shoppingcart',
@@ -36,10 +36,12 @@ var ShoppingCart = database.sequelize.define(
     }
 )
 ShoppingCart.belongsTo(Client, {foreignKey: 'client_id'});
+
 ShoppingCart.belongsToMany(ProductTest, {
-    through: 'Productsshoppingcart',
+    through: Productsshoppingcart,
     as: 'products',
-    foreignKey: 'product_id'
+    foreignKey: 'sc_id',
+    otherKey: 'product_id'
   });
 
 

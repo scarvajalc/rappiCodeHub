@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const database = require('../database');
-const Productsshoppingcart = require('../models/productsshoppingcart');
 const ShoppingCart = require('../models/shoppingcart');
+const Productsshoppingcart = require('../models/productsshoppingcart');
+
+
 
 var ProductTest = database.sequelize.define(
     'producttest',
@@ -35,10 +37,12 @@ var ProductTest = database.sequelize.define(
         timestamps: false
     }
 )
-
-ProductTest.belongsToMany(ShoppingCart, {
-    through: 'Productsshoppingcart',
+//console.log("sfsd "+Productsshoppingcart)
+/*ProductTest.belongsToMany(ShoppingCart, {
+    through: Productsshoppingcart,
     as: 'shoppingcarts',
     foreignKey: 'sc_id'
   });
+*/
+  
 module.exports = ProductTest
