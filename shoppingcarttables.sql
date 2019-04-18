@@ -13,7 +13,7 @@ CREATE TABLE shoppingcarts
         REFERENCES clients (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-)
+);
 
 -- DROP TABLE producttests;
 
@@ -27,7 +27,7 @@ CREATE TABLE producttests
     "deletedAt" timestamp without time zone,
     active boolean DEFAULT true,
     CONSTRAINT producttests_pkey PRIMARY KEY (id)
-)
+);
 -- DROP TABLE productsshoppingcarts;
 
 CREATE TABLE productsshoppingcarts

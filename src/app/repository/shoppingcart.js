@@ -3,20 +3,26 @@ const ShoppingCart = require('../models/shoppingcart');
 
 
 const sprepository = {
-    showCart(res) {
-        ShoppingCart.findOne({
+    getUserShoppingCart(userId) {
+        return ShoppingCart.findOne({
             where:{
-                id: 1
+                client_id: userId
             }
         }).then(cart =>{
-            console.log("cart=", cart);
-            //res.send(cart)
-            cart.getProducts().then(products =>{
-                console.log("cart=", products);
-                res.send(products)
-            })
+            console.log(cart)
+            if(cart){
+                return cart.getProducts().then(products =>{
+                        return {cartExists: true, cartProducts: products}
+                }).catch(err => {
+                    return { error: err }
+                });
+            }else{
+                return {cartExists: false, message: 'No hay items en el carrito'}
+            }
             
-        })
+        }).catch(err => {
+            return { error: err }
+        });
     }
     /*adminLogin(adminData, res) {
         Admin.findOne({
