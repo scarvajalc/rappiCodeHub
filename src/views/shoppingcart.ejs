@@ -57,26 +57,22 @@
                 <div class="row slider-text align-items-center justify-content-center">
                     <div class="col-md-10 col-sm-12 ftco-animate text-center">
                         <div class="col-sm-6 mx-auto">
-                            <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Register</h2>
-                            <form action="/clients/register" method="POST">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="first_name" placeholder="First Name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="phone" placeholder="Phone">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
-                                </div>
+                            <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Tu Carrito de Compras</h2>
+                            <form action="/createOrder" method="POST">
+                                <% if(!emptyshoppingcart){ %>
+                                    <% for(let i = 0; i < products.length; i++){ %>
+                                        <div>
+                                            <%= products[i].name + " " + products[i].price + " " + products[i].productsshoppingcart.ammount%>
+                                        </div>
+                                    <% } %>
+                                    Total: <%= total %>
+                                    <div class="form-group">
+                                        <input type="submit" value="Create Order" class="btn btn-primary py-3 px-5">
+                                    </div>
+                                <% } else {%>
+                                    <h3 class="h4 mb-4" style="color:white; padding-top: 10%"><%= message %></h3>
+                                    
+                                <% } %>
                             </form>
                         </div>
                     </div>
