@@ -27,7 +27,16 @@ module.exports = (app) => {
                 clientName: req.session.user.first_name
             })
         } else {
-            res.redirect('clientLogin');
+            res.redirect('/clientLogin');
         }
-    })
+    });
+
+    app.get('/clientLogout', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.clearCookie('id');
+            res.redirect('/clientIndex');
+        } else {
+            res.redirect('/clientLogin');
+        }
+    });
 };
