@@ -2,7 +2,11 @@ const clientController = require('../controllers/client');
 
 module.exports = (app) => {
     app.get('/clientIndex', (req, res) => {
-        res.render('clientIndex');
+        if (req.session.user && req.cookies.id) {
+            res.redirect('/clientHome');
+        } else {
+            res.render('clientIndex');
+        }
     });
 
     app.get('/clientRegister', function (req, res) {
@@ -27,7 +31,16 @@ module.exports = (app) => {
                 clientName: req.session.user.first_name
             })
         } else {
-            res.redirect('clientLogin');
+            res.redirect('/clientLogin');
         }
-    })
+    });
+
+    app.get('/clientLogout', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.clearCookie('id');
+            res.redirect('/clientIndex');
+        } else {
+            res.redirect('/clientLogin');
+        }
+    });
 };

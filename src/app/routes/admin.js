@@ -12,4 +12,23 @@ module.exports = (app) => {
     app.post('/admins/login', (req, res) => {
         adminController.adminLogin(req, res);
     });
+
+    app.get('/adminHome', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.render('adminHome', {
+                adminName: req.session.user.first_name
+            })
+        } else {
+            res.redirect('/adminLogin');
+        }
+    });
+
+    app.get('/adminLogout', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.clearCookie('id');
+            res.redirect('/adminIndex');
+        } else {
+            res.redirect('/adminLogin');
+        }
+    });
 };
