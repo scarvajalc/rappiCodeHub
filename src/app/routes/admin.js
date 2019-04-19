@@ -22,4 +22,13 @@ module.exports = (app) => {
             res.redirect('/adminLogin');
         }
     });
+
+    app.get('/adminLogout', (req, res) => {
+        if (req.session.user && req.cookies.id) {
+            res.clearCookie('id');
+            res.redirect('/adminIndex');
+        } else {
+            res.redirect('/adminLogin');
+        }
+    });
 };
