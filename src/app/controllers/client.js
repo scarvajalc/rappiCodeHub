@@ -6,6 +6,11 @@ const clientController = {
         const clientData = clientHandler.handleHTTPLogin(req);
         const repoResponse = await repository.clientLogin(clientData, res);
         if (repoResponse.validCredentials) {
+            if (repoResponse.clientData.client_addresses[0] == undefined) {
+                req.session.address = '';
+            } else {
+                req.session.address = repoResponse.clientData.client_addresses[0].dataValues;
+            }
             req.session.user = repoResponse.clientData;
             res.redirect("/clientHome")
         } else {
@@ -25,7 +30,7 @@ const clientController = {
         const clientAddress = clientHandler.handleHTTPRegisterAddress(req);
         const repoResponse = await repository.clientRegisterAddress(clientAddress);
         if (repoResponse.message) {
-            req.session.address = repoResponse.clientAddress;
+            req.session.address = repoResponse.clientAddress.dataValues;
             res.redirect('/clientHome');
         } else {
             res.redirect('/clientLogin');
