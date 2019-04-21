@@ -26,6 +26,11 @@ function initAutocomplete() {
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
+
+    var infowindow = new google.maps.InfoWindow({
+        content: ''
+    });
+
     searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
@@ -45,6 +50,7 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             }
+
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -65,6 +71,8 @@ function initAutocomplete() {
             marker.addListener('dragend', function () {
                 var geocoder = new google.maps.Geocoder;
                 geocodeLatLng(geocoder, marker.getPosition(), marker);
+                infowindow.setContent(marker.title);
+                infowindow.open(map, marker);
             });
 
             if (place.geometry.viewport) {
@@ -73,6 +81,7 @@ function initAutocomplete() {
             } else {
                 bounds.extend(place.geometry.location);
             }
+
         });
         map.fitBounds(bounds);
     });
