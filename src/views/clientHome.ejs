@@ -83,7 +83,7 @@
           <div id="map"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button id="registerAddressClose" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           <form>
             <button id="registerAddress" type="button" class="btn btn-primary">Register</button>
           </form>
@@ -102,12 +102,22 @@
       })
         .then((confirmed) => {
           if (confirmed) {
-            swal({
-              title: "Location Saved!",
-              text: "Now is time to order",
-              icon: "success"
+            $.ajax({
+              type: "POST",
+              url: "/registerAddress",
+              data: { latitude: latitude, longitude: longitude, address: address }
             })
-          }
+              .then(() => {
+                swal({
+                  title: "Location Saved!",
+                  text: "Now it is time to order",
+                  icon: "success"
+                })
+              })
+              .then(() => {
+                $("#registerAddressClose").click();
+              })
+          };
         })
     });
   </script>

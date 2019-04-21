@@ -1,6 +1,7 @@
 const Client = require('../models/client');
 const Admin = require('../models/admin');
 const RappiTendero = require('../models/rappitendero');
+const ClientAddress = require('../models/client_addresses');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -103,6 +104,16 @@ const repository = {
                 } else {
                     return { validCredentials: false, message: 'RappiTendero does not exist' }
                 };
+            })
+            .catch(err => {
+                return { error: err }
+            });
+    },
+
+    clientRegisterAddress(clientAddress) {
+        return ClientAddress.create(clientAddress)
+            .then(clientAddress => {
+                return { message: `${clientAddress.address_name} registered`, clientAddress: clientAddress }
             })
             .catch(err => {
                 return { error: err }
