@@ -40,10 +40,14 @@ const repository = {
     },
 
     clientLogin(clientData, res) {
+        Client.hasMany(ClientAddress, { foreignKey: 'client_id' });
+        ClientAddress.belongsTo(Client, { foreignKey: 'id' });
+
         return Client.findOne({
             where: {
                 email: clientData.email
-            }
+            },
+            include: [ClientAddress]
         })
             .then(client => {
                 if (client) {
