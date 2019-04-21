@@ -45,8 +45,13 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
+          <%if (clientAddress.length > 0) { %>
+          <li class="nav-item"><a id="address" href="" class="nav-link">Dirección
+              Actual</a></li>
+          <% } else { %>
           <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#exampleModal">Nueva
               Dirección</a></li>
+          <% } %>
           <li class="nav-item"><a href="/clientLogout" class="nav-link">Logout</a></li>
         </ul>
       </div>
@@ -116,9 +121,15 @@
               })
               .then(() => {
                 $("#registerAddressClose").click();
+                window.location = '/clientHome';
               })
           };
         })
+    });
+
+    $("#address").click(function (e) {
+      e.preventDefault();
+      swal("Your current location is", "<%= clientAddress %>")
     });
   </script>
 
