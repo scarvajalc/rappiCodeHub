@@ -21,6 +21,18 @@ const clientHandler = {
         };
 
         return clientData;
+    },
+
+    handleHTTPRegisterAddress(req) {
+        const clientAddress = {
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            address_name: req.body.address,
+            current: true,
+            client_id: req.session.user.id
+        };
+
+        return clientAddress;
     }
 }
 
