@@ -27,8 +27,13 @@ module.exports = (app) => {
 
     app.get('/clientHome', (req, res) => {
         if (req.session.user && req.cookies.id) {
+            var clientAddress = '';
+            if (req.session.address.address_name != undefined) {
+                clientAddress = req.session.address.address_name;
+            }
             res.render('clientHome', {
-                clientName: req.session.user.first_name
+                clientName: req.session.user.first_name,
+                clientAddress: clientAddress
             })
         } else {
             res.redirect('/clientLogin');
