@@ -8,7 +8,7 @@
 
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -33.8688, lng: 151.2195 },
+        center: { lat: 4.6788055, lng: -74.0576059 },
         zoom: 13,
         mapTypeId: 'roadmap'
     });
@@ -37,7 +37,6 @@ function initAutocomplete() {
         markers.forEach(function (marker) {
             marker.setMap(null);
         });
-        markers = [];
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
@@ -55,14 +54,18 @@ function initAutocomplete() {
             };
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
-                position: place.geometry.location
-            }));
+                position: place.geometry.location,
+                draggable: true
+            });
 
-            alert(markers[0].position);
+            marker.addListener('dragend', function () {
+                var geocoder = new google.maps.Geocoder;
+                geocodeLatLng(geocoder, marker.getPosition(), marker);
+            });
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -73,4 +76,15 @@ function initAutocomplete() {
         });
         map.fitBounds(bounds);
     });
+
+
+    function geocodeLatLng(geocoder, coordinates, marker) {
+        geocoder.geocode({ 'location': coordinates }, function (results, status) {
+            if (status === 'OK') {
+                if (results[0]) {
+                    marker.title = results[0].formatted_address;
+                }
+            }
+        })
+    };
 }
