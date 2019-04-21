@@ -43,4 +43,8 @@ module.exports = (app) => {
             res.redirect('/clientLogin');
         }
     });
+
+    app.post('/registerAddress', (req, res) => {
+        clientController.clientRegisterAddress(req, res);
+    });
 };
