@@ -5,6 +5,9 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+var latitude = '';
+var longitude = '';
+var address = '';
 
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -75,6 +78,10 @@ function initAutocomplete() {
                 infowindow.open(map, marker);
             });
 
+            setAddress(marker.title);
+            setLatitude(marker.getPosition().lat());
+            setLongitude(marker.getPosition().lng());
+
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
                 bounds.union(place.geometry.viewport);
@@ -92,8 +99,23 @@ function initAutocomplete() {
             if (status === 'OK') {
                 if (results[0]) {
                     marker.title = results[0].formatted_address;
+                    setAddress(marker.title);
+                    setLatitude(marker.getPosition().lat());
+                    setLongitude(marker.getPosition().lng());
                 }
             }
         })
+    };
+
+    function setAddress(addr) {
+        address = addr;
+    };
+
+    function setLatitude(lat) {
+        latitude = lat;
+    };
+
+    function setLongitude(long) {
+        longitude = long;
     };
 }
