@@ -74,7 +74,6 @@ function initAutocomplete() {
             marker.addListener('dragend', function () {
                 var geocoder = new google.maps.Geocoder;
                 geocodeLatLng(geocoder, marker.getPosition(), marker);
-                infowindow.setContent(marker.title);
                 infowindow.open(map, marker);
             });
 
@@ -99,6 +98,7 @@ function initAutocomplete() {
             if (status === 'OK') {
                 if (results[0]) {
                     marker.title = results[0].formatted_address;
+                    infowindow.setContent(marker.title);
                     setAddress(marker.title);
                     setLatitude(marker.getPosition().lat());
                     setLongitude(marker.getPosition().lng());
