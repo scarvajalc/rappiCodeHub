@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="css/icomoon.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -76,16 +79,38 @@
           </button>
         </div>
         <div class="modal-body">
-          <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+          <input id="pac-input" class="controls" type="text" placeholder="Ingrese su ubicación">
           <div id="map"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Registrar</button>
+          <form>
+            <button id="registerAddress" type="button" class="btn btn-primary">Register</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    $("#registerAddress").click(function () {
+      swal({
+        title: "Please Confirm Address",
+        text: address,
+        icon: "warning",
+        buttons: ["Return", "Confirm"]
+      })
+        .then((confirmed) => {
+          if (confirmed) {
+            swal({
+              title: "Location Saved!",
+              text: "Now is time to order",
+              icon: "success"
+            })
+          }
+        })
+    });
+  </script>
 
   <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
