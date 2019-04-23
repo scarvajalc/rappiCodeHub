@@ -1,5 +1,6 @@
 const Client = require('../models/client');
 const ShoppingCart = require('../models/shoppingcart');
+const Productsshoppingcart = require('../models/productsshoppingcart');
 
 
 const sprepository = {
@@ -23,6 +24,20 @@ const sprepository = {
             }else{
                 return {cartExists: false, message: 'No hay items en el carrito'}
             }
+            
+        }).catch(err => {
+            return { error: err }
+        });
+    },
+
+    deleteShoppingCartProduct(scProductId){
+        return Productsshoppingcart.destroy({
+            where:{
+                id: scProductId
+            }
+        }).then(() =>{
+            //console.log(cart)
+            return {deleted: true}
             
         }).catch(err => {
             return { error: err }

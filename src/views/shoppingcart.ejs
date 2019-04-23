@@ -60,12 +60,34 @@
                             <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Tu Carrito de Compras</h2>
                             <form action="/createOrder" method="POST">
                                 <% if(!emptyshoppingcart){ %>
-                                    <% for(let i = 0; i < products.length; i++){ %>
-                                        <div>
-                                            <%= products[i].name + " " + products[i].price + " " + products[i].productsshoppingcart.ammount%>
-                                        </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Producto</th>
+                                                <th scope="col">Precio x Cantidad</th>
+                                                <th scope="col">   </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    <% for(let i = 0; i < products.length; i++){ %> 
+                                            <tr>
+                                                <th scope="row"><%= i+1 %></th>
+                                                <td><%= products[i].name %></td>
+                                                <td><%= products[i].price + " x " + products[i].productsshoppingcart.ammount %></td>
+                                                <td> <a href="/deleteshoppingcartproduct/?scproductid=<%= products[i].productsshoppingcart.id %>">Eliminar</a></td>
+                                              </tr>
                                     <% } %>
-                                    Total: <%= total %>
+                                        <tr>
+                                            <th scope="row">Total:</th>
+                                            <td> </td>
+                                            <td><%= total %></td>
+                                            <td> </td>
+                                            
+                                          </tr>
+                                   
+                                        </tbody >
+                                    </table>
                                     <div class="form-group">
                                         <input type="submit" value="Create Order" class="btn btn-primary py-3 px-5">
                                     </div>

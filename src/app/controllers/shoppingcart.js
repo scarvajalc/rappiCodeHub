@@ -1,4 +1,7 @@
 //const clientHandler = require('./handlers/client');
+const bodyParser = require('body-parser');  
+const url = require('url');  
+const querystring = require('querystring'); 
 const sprepository = require('../repository/shoppingcart');
 
 const shoppingCart = {
@@ -11,6 +14,18 @@ const shoppingCart = {
         } else {
             res.render('shoppingCart', {emptyshoppingcart: true, message: 'No hay items en el carrito'})
         }
+    },
+
+    async deleteSCProduct(req, res){
+        let scProductId = req.query.scproductid
+        let scresponse = await sprepository.deleteShoppingCartProduct(scProductId)
+        console.log(scresponse)
+        if(scresponse.deleted){
+            res.redirect('/shoppingcart')
+        }else{
+            res.send('Error while deleting product')
+        }
+
     }
 }
 

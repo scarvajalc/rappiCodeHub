@@ -1,8 +1,12 @@
 const shoppingCartController = require('../controllers/shoppingcart');
 
 module.exports = (app) => {
-    app.get('/test', (req, res) => {
+    app.get('/shoppingcart', (req, res) => {
         shoppingCartController.showCart(req, res);
+    });
+
+    app.get('/deleteshoppingcartproduct', (req, res) => {
+        shoppingCartController.deleteSCProduct(req, res);
     });
 
     /*app.get('/clientRegister', function (req, res) {
