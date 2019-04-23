@@ -41,7 +41,6 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="/adminRegisterRappiT" class="nav-link">Register RappiTendero</a></li>
                     <li class="nav-item"><a href="/adminLogout" class="nav-link">Logout</a></li>
                 </ul>
             </div>
@@ -50,14 +49,34 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-        <div class="slider-item"
-            style="background-image: url('images/after-business-hours-architecture-bar-34650.jpg');"
-            data-stellar-background-ratio="0.5">
+        <div class="slider-item" style="background-image: url('images/after-business-hours-architecture-bar-34650.jpg');" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center justify-content-center">
                     <div class="col-md-10 col-sm-12 ftco-animate text-center">
-                        <h1 class="mb-3">Welcome <%= adminName %></h1>
+                        <div class="col-sm-6 mx-auto">
+                            <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Register</h2>
+                            <form action="/rappiTenderos/register" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
