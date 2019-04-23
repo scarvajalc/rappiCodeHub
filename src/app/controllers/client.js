@@ -12,6 +12,7 @@ const clientController = {
                 req.session.address = repoResponse.clientData.client_addresses[0].dataValues;
             }
             req.session.user = repoResponse.clientData;
+            req.session.user_role = repoResponse.role;
             res.redirect("/clientHome")
         } else {
             res.redirect('/clientLogin')

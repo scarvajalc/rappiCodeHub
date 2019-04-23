@@ -7,6 +7,7 @@ const rappiTenderoController = {
         const repoResponse = await repository.rappiTenderoLogin(rappiTenderoData, res);
         if (repoResponse.validCredentials) {
             req.session.user = repoResponse.rappiTenderoData;
+            req.session.user_role = repoResponse.role;
             res.redirect("/rappiTenderoHome");
         } else {
             res.redirect('rappiTenderoLogin');
