@@ -7,6 +7,7 @@ const adminController = {
         const repoResponse = await repository.adminLogin(adminData, res);
         if (repoResponse.validCredentials) {
             req.session.user = repoResponse.adminData;
+            req.session.user_role = repoResponse.role;
             res.redirect("/adminHome");
         } else {
             res.redirect("adminLogin");

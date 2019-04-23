@@ -18,7 +18,7 @@ const repository = {
                         let token = jwt.sign(admin.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, adminData: admin }
+                        return { validCredentials: true, adminData: admin, role: 'admin' }
                     }
                 } else {
                     return { validCredentials: false, message: 'Admin does not exists' }
@@ -30,13 +30,17 @@ const repository = {
     },
 
     clientRegister(clientData, res) {
-        return Client.create(clientData)
-            .then(client => {
-                return { message: `${client.email} registered` }
+        return bcrypt.hash(clientData.password, 10)
+            .then(hash => {
+                clientData.password = hash;
+                return Client.create(clientData)
+                    .then(client => {
+                        return { message: `${client.email} registered` }
+                    })
+                    .catch(err => {
+                        return { error: err }
+                    });
             })
-            .catch(err => {
-                return { error: err }
-            });
     },
 
     clientLogin(clientData, res) {
@@ -55,7 +59,7 @@ const repository = {
                         let token = jwt.sign(client.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, clientData: client }
+                        return { validCredentials: true, clientData: client, role: 'client' }
                     }
                 } else {
                     return { validCredentials: false, message: 'Client does not exists' }
@@ -67,28 +71,17 @@ const repository = {
     },
 
     rappiTenderoRegister(rappiTenderoData, res) {
-        return RappiTendero.findOne({
-            where: {
-                email: rappiTenderoData.email
-            }
-        })
-            .then(rappiTendero => {
-                if (!rappiTendero) {
-                    bcrypt.hash(rappiTenderoData.password, 10, (err, hash) => {
-                        rappiTenderoData.password = hash;
-                        RappiTendero.create(rappiTenderoData)
-                            .then(client => {
-                                return { message: `${rappiTendero.email} registered` }
-                            })
-                            .catch(err => {
-                                return { error: err }
-                            });
+        return bcrypt.hash(rappiTenderoData.password, 10)
+            .then(hash => {
+                rappiTenderoData.password = hash;
+                return RappiTendero.create(rappiTenderoData)
+                    .then(rappiTendero => {
+                        return { message: `${rappiTendero.email} registered` }
+                    })
+                    .catch(err => {
+                        return { error: err }
                     });
-                };
             })
-            .catch(err => {
-                return { error: err }
-            });
     },
 
     rappiTenderoLogin(rappiTenderoData, res) {
@@ -103,7 +96,7 @@ const repository = {
                         let token = jwt.sign(rappiTendero.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, rappiTenderoData: rappiTendero }
+                        return { validCredentials: true, rappiTenderoData: rappiTendero, role: 'rappiTendero' }
                     }
                 } else {
                     return { validCredentials: false, message: 'RappiTendero does not exist' }
