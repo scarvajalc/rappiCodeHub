@@ -26,7 +26,7 @@ module.exports = (app) => {
     });
 
     app.get('/clientHome', (req, res) => {
-        if (req.session.user && req.cookies.id) {
+        if (req.session.user && req.cookies.id && req.session.user_role === 'client') {
             var clientAddress = '';
             if (req.session.address.address_name != undefined) {
                 clientAddress = req.session.address.address_name;
@@ -41,7 +41,7 @@ module.exports = (app) => {
     });
 
     app.get('/clientLogout', (req, res) => {
-        if (req.session.user && req.cookies.id) {
+        if (req.session.user && req.cookies.id && req.session.user_role === 'client') {
             res.clearCookie('id');
             res.redirect('/clientIndex');
         } else {

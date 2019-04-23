@@ -14,7 +14,7 @@ module.exports = (app) => {
     });
 
     app.get('/adminHome', (req, res) => {
-        if (req.session.user && req.cookies.id) {
+        if (req.session.user && req.cookies.id && req.session.user_role === 'admin') {
             res.render('adminHome', {
                 adminName: req.session.user.first_name
             })
@@ -27,6 +27,14 @@ module.exports = (app) => {
         if (req.session.user && req.cookies.id) {
             res.clearCookie('id');
             res.redirect('/adminIndex');
+        } else {
+            res.redirect('/adminLogin');
+        }
+    });
+
+    app.get('/adminRegisterRappiT', (req, res) => {
+        if (req.session.user && req.cookies.id && req.session.user_role === 'admin') {
+            res.render('adminHome');
         } else {
             res.redirect('/adminLogin');
         }

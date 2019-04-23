@@ -18,7 +18,7 @@ const repository = {
                         let token = jwt.sign(admin.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, adminData: admin }
+                        return { validCredentials: true, adminData: admin, role: 'admin' }
                     }
                 } else {
                     return { validCredentials: false, message: 'Admin does not exists' }
@@ -55,7 +55,7 @@ const repository = {
                         let token = jwt.sign(client.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, clientData: client }
+                        return { validCredentials: true, clientData: client, role: 'client' }
                     }
                 } else {
                     return { validCredentials: false, message: 'Client does not exists' }
@@ -103,7 +103,7 @@ const repository = {
                         let token = jwt.sign(rappiTendero.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1500
                         });
-                        return { validCredentials: true, rappiTenderoData: rappiTendero }
+                        return { validCredentials: true, rappiTenderoData: rappiTendero, role: 'rappiTendero' }
                     }
                 } else {
                     return { validCredentials: false, message: 'RappiTendero does not exist' }
