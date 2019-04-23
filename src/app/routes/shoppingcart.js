@@ -9,6 +9,10 @@ module.exports = (app) => {
         shoppingCartController.deleteSCProduct(req, res);
     });
 
+    app.get('/addproduct', (req, res) => {
+        shoppingCartController.addProduct(req, res);
+    });
+
     /*app.get('/clientRegister', function (req, res) {
         res.render('clientRegister');
     });

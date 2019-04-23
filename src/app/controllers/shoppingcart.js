@@ -6,7 +6,8 @@ const sprepository = require('../repository/shoppingcart');
 
 const shoppingCart = {
     async showCart(req, res) {
-        const userId = 8 ////change here for user session
+        const userId = req.session.user.id ////change here for user session
+        console.log("asddfffff " + userId)
         let spresponse = await sprepository.getUserShoppingCart(userId); 
         if (spresponse.cartExists && spresponse.cartProducts.length > 0) {
             //req.session.user = repoResponse.clientData;
@@ -26,6 +27,19 @@ const shoppingCart = {
             res.send('Error while deleting product')
         }
 
+    },
+
+    async addProduct(req, res){
+        let productId = req.query.productId
+        let ammount = req.query.ammount
+        let userId = req.session.user.id
+        let scresponse = await sprepository.addProduct(productId, ammount, userId)
+        if(scresponse.added){
+            res.redirect('shoppingcart')
+            //res.redirect('back')
+        }else{
+            res.send('Error while adding product')
+        }
     }
 }
 
