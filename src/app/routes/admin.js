@@ -34,7 +34,7 @@ module.exports = (app) => {
 
     app.get('/adminRegisterRappiT', (req, res) => {
         if (req.session.user && req.cookies.id && req.session.user_role === 'admin') {
-            res.render('adminHome');
+            res.render('adminRegisterRappiT');
         } else {
             res.redirect('/adminLogin');
         }
