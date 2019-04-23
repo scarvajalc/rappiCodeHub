@@ -15,10 +15,10 @@ const rappiTenderoController = {
     },
 
     async rappiTenderoRegister(req, res) {
-        const rappiTenderoData = await rappiTenderoHandler.handleHTTPRegister(req);
-        const repoResponse = repository.rappiTenderoRegister(rappiTenderoData, res);
+        const rappiTenderoData = rappiTenderoHandler.handleHTTPRegister(req);
+        const repoResponse = await repository.rappiTenderoRegister(rappiTenderoData, res);
         if (repoResponse.message) {
-            res.redirect('/rappiTenderoLogin');
+            res.redirect('/adminRegisterRappiT');
         };
     }
 
