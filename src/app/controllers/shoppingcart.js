@@ -6,7 +6,7 @@ const sprepository = require('../repository/shoppingcart');
 
 const shoppingCart = {
     async showCart(req, res) {
-        const userId = 6//req.session.user.id ////change here for user session
+        const userId = req.session.user.id ////change here for user session
         console.log("asddfffff " + userId)
         let spresponse = await sprepository.getUserShoppingCart(userId); 
         if (spresponse.cartExists && spresponse.cartProducts.length > 0) {
@@ -32,7 +32,7 @@ const shoppingCart = {
     async addProduct(req, res){
         let productId = req.query.productId
         let ammount = req.query.ammount
-        let userId = 6//req.session.user.id
+        let userId = req.session.user.id
         let scresponse = await sprepository.addProduct(productId, ammount, userId)
         if(scresponse.added){
             res.redirect('/shoppingcart')
