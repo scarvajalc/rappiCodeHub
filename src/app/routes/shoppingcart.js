@@ -13,6 +13,10 @@ module.exports = (app) => {
         shoppingCartController.addProduct(req, res);
     });
 
+    app.get('/preorder',(req, res) => {
+        shoppingCartController.preorder(req, res);
+    } )
+
     /*app.get('/clientRegister', function (req, res) {
         res.render('clientRegister');
     });

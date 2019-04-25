@@ -7,7 +7,6 @@ const sprepository = require('../repository/shoppingcart');
 const shoppingCart = {
     async showCart(req, res) {
         const userId = req.session.user.id ////change here for user session
-        console.log("asddfffff " + userId)
         let spresponse = await sprepository.getUserShoppingCart(userId); 
         if (spresponse.cartExists && spresponse.cartProducts.length > 0) {
             //req.session.user = repoResponse.clientData;
@@ -20,7 +19,6 @@ const shoppingCart = {
     async deleteSCProduct(req, res){
         let scProductId = req.query.scproductid
         let scresponse = await sprepository.deleteShoppingCartProduct(scProductId)
-        console.log(scresponse)
         if(scresponse.deleted){
             res.redirect('/shoppingcart')
         }else{
@@ -40,6 +38,23 @@ const shoppingCart = {
         }else{
             res.send('Error while adding product')
         }
+    },
+
+    async preorder(req, res){
+        let userId = req.session.user.id
+        let clientAddress = '';
+        if (req.session.address.address_name != undefined) {
+            clientAddress = req.session.address.address_name;
+        }else{
+            message = "Antes de crear la orden debe asignar una  dirección"
+        }
+        let scinfo = await sprepository.getUserShoppingCart(userId);
+        let productTotal =  scinfo.total
+        let deliveryCost = 4500
+        let orderTotal = productTotal + deliveryCost
+        let deliveryTime = 30
+        
+        res.render('preorder',{addres: clientAddress, productTotal: productTotal, deliveryCost: deliveryCost, orderTotal : orderTotal, deliveryTime: deliveryTime })
     }
 }
 
