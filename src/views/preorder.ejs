@@ -57,44 +57,43 @@
                 <div class="row slider-text align-items-center justify-content-center">
                     <div class="col-md-10 col-sm-12 ftco-animate text-center">
                         <div class="col-sm-6 mx-auto">
-                            <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Tu Carrito de Compras</h2>
-                                <% if(!emptyshoppingcart){ %>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Producto</th>
-                                                <th scope="col">Precio x Cantidad</th>
-                                                <th scope="col">   </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                    <% for(let i = 0; i < products.length; i++){ %> 
-                                            <tr>
-                                                <th scope="row"><%= i+1 %></th>
-                                                <td><%= products[i].name %></td>
-                                                <td><%= products[i].price + " x " + products[i].productsshoppingcart.ammount %></td>
-                                                <td> <a href="/deleteshoppingcartproduct/?scproductid=<%= products[i].productsshoppingcart.id %>">Eliminar</a></td>
-                                              </tr>
-                                    <% } %>
-                                        <tr>
-                                            <th scope="row">Total:</th>
-                                            <td> </td>
-                                            <td><%= total %></td>
-                                            <td> </td>
-                                            
-                                          </tr>
-                                   
-                                        </tbody >
-                                    </table>
-                                    <div class="form-group">
-                                        <a href="/preorder" class="btn btn-primary py-3 px-5" >Continuar</a>
-                                    </div>
-                                <% } else {%>
-                                    <h3 class="h4 mb-4" style="color:white; padding-top: 10%"><%= message %></h3>
+                            <h2 class="h4 mb-4" style="color:white; padding-top: 10%">Preorden</h2>
+                           
+                                <div style="font-size: 20px">
+                                    <div>Dirección de entrega : <%= addres %> </div>
+                                    <div>Tiempo estimado de entrega :   <%= deliveryTime %> min </div>
+                                    <div>Metodo de pago :   Efectivo </div>
+                                </div>
+                                <hr>
+                                <hr>
+                                <table class="table">
                                     
-                                <% } %>
+                                    <tbody>
+                                
+                                        <tr>
+                                            <th scope="row">Productos</th>
+                                            <td>$<%= productTotal %></td>
                 
+                                          </tr>
+                                
+                                        <tr>
+                                        <th scope="row">Entrega</th>
+                                        <td><%= deliveryCost %></td>
+                                        
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Total</th>
+                                            <td><%= orderTotal %></td>
+                                            
+                                        </tr>
+                               
+                                    </tbody >
+                                </table>
+                                <%if(addres === ""){%>
+                                    <%= message %>
+                                <%}else{%>
+                                    <a href="/order" class="btn btn-primary py-3 px-5" >Crear Orden</a>
+                                <%}%>
                         </div>
                     </div>
                 </div>
