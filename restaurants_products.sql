@@ -3,7 +3,7 @@
 CREATE TABLE restaurantchains
 (
     id serial NOT NULL,
-    NIT varchar(40) NOT NULL,
+    nit varchar(40) NOT NULL,
 	name varchar(100) NOT NULL,
     "createdAt" timestamp without time zone,
     "updatedAt" timestamp without time zone,
