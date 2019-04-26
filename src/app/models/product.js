@@ -41,12 +41,12 @@ var Product = database.sequelize.define(
     }
 )
 
-Product.belongsToMany(Branch, {
+/*Product.belongsToMany(Branch, {
     through: BranchProduct,
     as: 'branches',
     foreignKey: 'product_id',
     otherKey: 'branch_id'
-});
+});*/
 
 Product.belongsToMany(Category, {
     through: CategoryProduct,

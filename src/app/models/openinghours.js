@@ -17,18 +17,11 @@ var OpeningHour = database.sequelize.define(
                 key: 'id'
             }
         },
-        opening_day: {
-            type: Sequelize.INTEGER
-        },
         opening_time: {
-            type: Sequelize.TIME
-        }
-        ,
-        closing_day: {
             type: Sequelize.INTEGER
         },
         closing_time: {
-            type: Sequelize.TIME
+            type: Sequelize.INTEGER
         },
         createdAt: {
             type: Sequelize.DATE,

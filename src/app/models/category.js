@@ -37,11 +37,11 @@ var Category = database.sequelize.define(
     }
 )
 
-Category.belongsToMany(Product, {
+/*Category.belongsToMany(Product, {
     through: CategoryProduct,
     as: 'products',
     foreignKey: 'category_id',
     otherKey: 'product_id'
-});
+});*/
 
 module.exports = Category
