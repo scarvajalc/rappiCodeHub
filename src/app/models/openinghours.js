@@ -1,55 +1,48 @@
-const Sequelize = require('sequelize');
-const database = require('../database');
-const Branch = require('../models/branch');
+const Sequelize = require("sequelize");
+const database = require("../database");
+const Branch = require("../models/branch");
 
 var OpeningHour = database.sequelize.define(
-    'openinghour',
-    {
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        branch_id: {
-            type: Sequelize.INTEGER,
-            references: {
-                model: 'branches',
-                key: 'id'
-            }
-        },
-        opening_day: {
-            type: Sequelize.INTEGER
-        },
-        opening_time: {
-            type: Sequelize.TIME
-        }
-        ,
-        closing_day: {
-            type: Sequelize.INTEGER
-        },
-        closing_time: {
-            type: Sequelize.TIME
-        },
-        createdAt: {
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW
-        },
-        updatedAt: {
-            type: Sequelize.DATE
-        },
-        deletedAt: {
-            type: Sequelize.DATE
-        },
-        active: {
-            type: Sequelize.BOOLEAN
-        }
+  "openinghour",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
-    {
-        timestamps: false
+    branch_id: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "branches",
+        key: "id"
+      }
+    },
+    opening_time: {
+      type: Sequelize.INTEGER
+    },
+    closing_time: {
+      type: Sequelize.INTEGER
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE
+    },
+    deletedAt: {
+      type: Sequelize.DATE
+    },
+    active: {
+      type: Sequelize.BOOLEAN
     }
-)
+  },
+  {
+    timestamps: false
+  }
+);
 
-Branch.hasMany(OpeningHour, {foreignKey: 'branch_id', sourceKey: 'id'});
-OpeningHour.belongsTo(Branch, {foreignKey: 'branch_id', targetKey: 'id'});
+Branch.hasMany(OpeningHour, { foreignKey: "branch_id", sourceKey: "id" });
+OpeningHour.belongsTo(Branch, { foreignKey: "branch_id", targetKey: "id" });
 
-module.exports = OpeningHour
+module.exports = OpeningHour;

@@ -109,11 +109,9 @@ CREATE TABLE openinghours
 (
     id serial NOT NULL,
     branch_id integer NOT NULL,
-    opening_day integer NOT NULL,
-	opening_time time NOT NULL,
-	closing_day integer NOT NULL,
-	closing_time time NOT NULL,
-    "createdAt" timestamp without time zone,
+    opening_time integer NOT NULL,  /*number of seconds since monday at 00:00:00*/
+	closing_time integer NOT NULL,  /*number of seconds since monday at 00:00:00*/
+	"createdAt" timestamp without time zone,
     "updatedAt" timestamp without time zone,
     "deletedAt" timestamp without time zone,
     active boolean DEFAULT true,
