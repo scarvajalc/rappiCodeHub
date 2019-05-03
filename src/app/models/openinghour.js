@@ -42,7 +42,7 @@ var OpeningHour = database.sequelize.define(
   }
 );
 
-Branch.hasMany(OpeningHour, { foreignKey: "branch_id", sourceKey: "id" });
-OpeningHour.belongsTo(Branch, { foreignKey: "branch_id", targetKey: "id" });
+Branch.hasMany(OpeningHour, {as: 'hours', foreignKey: 'branch_id', sourceKey: 'id'});
+OpeningHour.belongsTo(Branch, {foreignKey: 'branch_id', targetKey: 'id'});
 
 module.exports = OpeningHour;
