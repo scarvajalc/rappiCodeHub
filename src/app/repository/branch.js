@@ -1,6 +1,7 @@
 
 const Branch = require('../models/branch');
 const OpeningHour = require('../models/openinghour');
+const DateParser = require('../repository/date_parser');
 
 const obrepository = {
     
@@ -10,22 +11,31 @@ const obrepository = {
             where:{
                 active: true
             }
-            /*include: [{
-              model: OpeningHour,
-              required: true
-             }]*/
           })
-            
+        
+        let current_time = DateParser.secsFromWeekStart(new Date())
+        let open_branches = []
+        for(let i = 0; i < branches.length; i++) {
+            let open_branch = false
+            let current_branch = branches[i]
+            let opening_hours = await current_branch.getHours()
+            for(let j = 0; j < opening_hours.length; j++) {
+                if (opening_hours[j].opening_time <= current_time && 
+                    opening_hours[j].closing_time >= current_time) {
+                    open_branch = true
+                    break
+                }
+            }
+            if (open_branch) open_branches.push(current_branch)
+            return open_branches
+        }
+        
+               
             //date = new Date(); //America/Bogota time zone expected.
             //seconds since Sun @ 00:00:00
             //secondsSinceWeekStarted = date.getDay()*86400 + date.getHours()*3600 + date.getMinutes()*60 + date.getSeconds();
             
-            for(let i = 0; i < branches.length; i++){
-                console.log('Hola')
-                let opening_hours = await branches[i].getHours()
-                console.log(opening_hours[0].opening_time)
-                //console.log(branches[i])
-            }
+            
             //console.log(branches)
             /*if(cart){
                 return cart.getProducts().then(products =>{

@@ -16,6 +16,8 @@ values (5, 3, 'Hamburguesas Krusty - Calle Falsa', 'Calle Falsa 123', 4.0, 4.0, 
 insert into branches (id, restaurantchain_id, name, address, latitude, longitude, active)
 values (6, 3, 'Hamburguesas Krusty - Springfield', 'Evergreen 590', 5.0, 5.0, true);
 insert into branches (id, restaurantchain_id, name, address, latitude, longitude, active)
+values (7, 3, 'Hamburguesas Krusty - XYZ', 'Evergreen 534', 6.0, 6.0, true);
+insert into branches (id, restaurantchain_id, name, address, latitude, longitude, active)
 values (8, 4, 'El Inactivo - Qué importa', 'Calle qué importa 123', 10.0, 10.0, false);
 
 insert into openinghours (branch_id, opening_time, closing_time) values (1, 32400, 79200);
@@ -36,6 +38,7 @@ insert into openinghours (branch_id, opening_time, closing_time) values (3, 0, 6
 insert into openinghours (branch_id, opening_time, closing_time) values (5, 0, 604800);
 insert into openinghours (branch_id, opening_time, closing_time) values (6, 0, 604800);
 insert into openinghours (branch_id, opening_time, closing_time) values (8, 0, 604800);
+insert into openinghours (branch_id, opening_time, closing_time) values (7, 0, 3600);
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 43200, 93600);
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 129600, 180000);
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 216000, 266400);
