@@ -27,8 +27,8 @@ const obrepository = {
                 }
             }
             if (open_branch) open_branches.push(current_branch)
-            return open_branches
         }
+        return open_branches
         
                
             //date = new Date(); //America/Bogota time zone expected.

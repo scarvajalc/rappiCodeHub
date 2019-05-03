@@ -1,4 +1,6 @@
 const clientController = require("../controllers/client");
+const obrepository = require('../repository/branch');
+const BranchController = require('../controllers/branch');
 
 module.exports = app => {
   app.get("/clientIndex", (req, res) => {
@@ -35,10 +37,9 @@ module.exports = app => {
       if (req.session.address.address_name != undefined) {
         clientAddress = req.session.address.address_name;
       }
-      res.render("clientHome", {
-        clientName: req.session.user.first_name,
-        clientAddress: clientAddress
-      });
+
+      BranchController.showRestaurantList(req, res)
+
     } else {
       res.redirect("/clientLogin");
     }

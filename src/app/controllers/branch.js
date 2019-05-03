@@ -4,7 +4,17 @@ const openBranches = {
     async showRestaurantList(req, res) {
         const userId = 8 ////change here for user session
         let open_branches = await obrepository.getOpenBranches(/*userId*/)
-        res.render("open_branches", { branches: open_branches });
+        var clientAddress = "";
+      if (req.session.address.address_name != undefined) {
+        clientAddress = req.session.address.address_name;
+      }
+
+        res.render("clientHome", {
+            clientName: req.session.user.first_name,
+            clientAddress: clientAddress,
+            branches: open_branches
+        });
+    
     }
 }
 
