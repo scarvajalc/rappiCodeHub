@@ -26,6 +26,13 @@ const rappiTenderoController = {
     if (repoResponse.message) {
       res.redirect("/adminRegisterRappiT");
     }
+  },
+
+  async rappiTenderoUpdateAddress(req, res) {
+    const rappiTenderoAddress = rappiTenderoHandler.handleHTTPUpdateAddress(
+      req
+    );
+    repository.rappiTenderoUpdateAddress(rappiTenderoAddress, res);
   }
 };
 
