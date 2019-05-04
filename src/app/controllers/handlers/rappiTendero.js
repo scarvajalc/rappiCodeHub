@@ -21,6 +21,16 @@ const rappiTenderoHandler = {
     };
 
     return rappiTenderoData;
+  },
+
+  handleHTTPUpdateAddress(req) {
+    const rappiTenderoAddress = {
+      id: req.session.user.id,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
+    };
+
+    return rappiTenderoAddress;
   }
 };
 
