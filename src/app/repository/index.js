@@ -133,6 +133,19 @@ const repository = {
       .catch(err => {
         return { error: err };
       });
+  },
+
+  rappiTenderoUpdateAddress(rappiTenderoAddress) {
+    RappiTendero.findOne({
+      where: {
+        id: rappiTenderoAddress.id
+      }
+    }).then(rappiTendero => {
+      rappiTendero.update({
+        latitude: rappiTenderoAddress.latitude,
+        longitude: rappiTenderoAddress.longitude
+      });
+    });
   }
 };
 
