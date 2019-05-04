@@ -32,7 +32,6 @@ const openBranches = {
                 open_branches[i].distance = geodistance(lat, lon,
                             open_branches[i].latitude, open_branches[i].longitude)
             }
-            
             for(let i = 0; i < open_branches.length-1; i++) {
                 for(let j = 0; j < open_branches.length-1; j++) {
                     if  (open_branches[j].distance > open_branches[j+1].distance) {
