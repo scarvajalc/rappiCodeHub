@@ -1,6 +1,5 @@
 const clientController = require("../controllers/client");
-const obrepository = require('../repository/branch');
-const BranchController = require('../controllers/branch');
+const branchController = require("../controllers/branch");
 
 module.exports = app => {
   app.get("/clientIndex", (req, res) => {
@@ -27,7 +26,7 @@ module.exports = app => {
     clientController.clientRegister(req, res);
   });
 
-  app.get("/clientHome", (req, res) => {
+  app.get("/clientHome", async (req, res) => {
     if (
       req.session.user &&
       req.cookies.id &&
@@ -38,8 +37,16 @@ module.exports = app => {
         clientAddress = req.session.address.address_name;
       }
 
-      BranchController.showRestaurantList(req, res)
+      const orderedOpenBranches = await branchController.getAllBranches(
+        req,
+        res
+      );
 
+      res.render("clientHome", {
+        clientName: req.session.user.first_name,
+        clientAddress: clientAddress,
+        branches: orderedOpenBranches
+      });
     } else {
       res.redirect("/clientLogin");
     }
