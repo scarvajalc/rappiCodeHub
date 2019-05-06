@@ -1,21 +1,28 @@
 const Sequelize = require("sequelize");
 const database = require("../database");
+const Branch = require("../models/branch");
+const Products = require("../models/product");
 
-module.exports = database.sequelize.define(
+var branchProducts = database.sequelize.define(
   "branchproduct",
   {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     product_id: {
       type: Sequelize.INTEGER,
       references: {
         model: "products",
-        key: "id"
+        key: "product_id"
       }
     },
     branch_id: {
       type: Sequelize.INTEGER,
       references: {
         model: "branches",
-        key: "id"
+        key: "branch_id"
       }
     },
     stock: {
@@ -39,3 +46,23 @@ module.exports = database.sequelize.define(
     timestamps: false
   }
 );
+
+Branch.hasMany(branchProducts, {
+  foreignKey: "branch_id"
+});
+
+branchProducts.belongsTo(Branch, {
+  foreignKey: "branch_id",
+  sourceKey: "id"
+});
+
+Products.hasMany(branchProducts, {
+  foreignKey: "product_id"
+});
+
+branchProducts.belongsTo(Products, {
+  foreignKey: "product_id",
+  sourceKey: "id"
+});
+
+module.exports = branchProducts;
