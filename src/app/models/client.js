@@ -24,7 +24,7 @@ module.exports = database.sequelize.define(
     password: {
       type: Sequelize.STRING
     },
-    createdAt: {
+    createdat: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     },
