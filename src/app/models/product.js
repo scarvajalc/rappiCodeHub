@@ -34,6 +34,9 @@ var Product = database.sequelize.define(
     },
     active: {
       type: Sequelize.BOOLEAN
+    },
+    img_url: {
+      type: Sequelize.STRING
     }
   },
   {
