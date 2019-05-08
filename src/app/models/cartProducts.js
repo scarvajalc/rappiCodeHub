@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const database = require("../database");
 const Client = require("../models/client");
 const Product = require("../models/product");
+const Cart = require("../models/cart");
 
 var CartProducts = database.sequelize.define(
   "cartproduct",
@@ -23,12 +24,6 @@ var CartProducts = database.sequelize.define(
     },
     quantity: {
       type: Sequelize.INTEGER
-    },
-    updatedAt: {
-      type: Sequelize.DATE
-    },
-    deletedAt: {
-      type: Sequelize.DATE
     }
   },
   {
@@ -45,12 +40,12 @@ CartProducts.belongsTo(Product, {
   sourceKey: "id"
 });
 
-Client.hasMany(CartProducts, {
-  foreignKey: "client_id"
+Cart.hasMany(CartProducts, {
+  foreignKey: "cart_id"
 });
 
-CartProducts.belongsTo(Client, {
-  foreignKey: "client_id",
+CartProducts.belongsTo(Cart, {
+  foreignKey: "cart_id",
   sourceKey: "id"
 });
 
