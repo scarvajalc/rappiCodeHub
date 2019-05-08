@@ -10,6 +10,12 @@ const cartController = {
   async removeFromCart(req, res) {
     const productData = cartHandler.handleHTTPRemoveFromCart(req);
     const repoResponse = await repository.removeProductFromCart(productData);
+  },
+
+  async getClientCart(req, res) {
+    const clientId = req.session.user.id;
+    const repoResponse = await repository.getClientCart(clientId);
+    return repoResponse;
   }
 };
 
