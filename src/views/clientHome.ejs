@@ -217,7 +217,8 @@
               <div class="col-lg-6">
                 
                 <%for(let i=0; i<branches.length; i+=2) {%>
-                <div class="menus d-flex ftco-animate">
+                <a href="product?branch=<%=branches[i].id%>">
+                <div class="menus d-flex ftco-animate">s
                   <div class="menu-img" style="background-image: url(images/dish-3.jpg);"></div>
                   <div class="text d-flex">
                     <div class="one-half">
@@ -227,13 +228,14 @@
                     
                   </div>
                 </div>
-
+                </a>
                 <%}%>
                 
               </div>
 
               <div class="col-lg-6">
                 <%for(let i=1; i<branches.length; i+=2) {%>
+                  <a href="product?branch=<%=branches[i].id%>">
                   <div class="menus d-flex ftco-animate">
                     <div class="menu-img" style="background-image: url(images/dish-3.jpg);"></div>
                     <div class="text d-flex">
@@ -241,282 +243,19 @@
                         <h3> <%=branches[i].name%>  </h3>
                         <p><span> <%=branches[i].address%> </span></p>
                       </div>
-                      
                     </div>
                   </div>
-  
+                </a>
                   <%}%>
                 </div>
             </div>
           </div><!-- END -->
-
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-1.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Grilled Beef with potatoes</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-2.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Grilled Beef with potatoes</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-3.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Grilled Beef with potatoes</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-4.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Grilled Beef with potatoes</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-5.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Grilled Beef with potatoes</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-6.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Tiramisu</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-7.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Chocolate Cream</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-8.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Pizza Pie</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-9.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Sicilian Ricotta</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/dessert-10.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Mango FLoat</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- END -->
-
-          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-1.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Lemon Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-2.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Guava Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-3.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Sprite</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-4.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Cola</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-5.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Wine</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-6.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Beer</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-7.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Mango Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-8.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Apple Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-9.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Strawberry Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="menus d-flex ftco-animate">
-                  <div class="menu-img" style="background-image: url(images/drink-10.jpg);"></div>
-                  <div class="text d-flex">
-                    <div class="one-half">
-                      <h3>Orange Juice</h3>
-                      <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-                    </div>
-                    <div class="one-forth">
-                      <span class="price">$29</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
     
-
-
 
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">

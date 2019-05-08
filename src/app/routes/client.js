@@ -33,11 +33,6 @@ module.exports = app => {
       req.cookies.id &&
       req.session.user_role === "client"
     ) {
-      var clientAddress = "";
-      if (req.session.address.address_name != undefined) {
-        clientAddress = req.session.address.address_name;
-      }
-
       BranchController.showRestaurantList(req, res)
 
     } else {

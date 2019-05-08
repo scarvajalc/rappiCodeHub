@@ -29,28 +29,6 @@ const obrepository = {
             if (open_branch) open_branches.push(current_branch)
         }
         return open_branches
-        
-               
-            //date = new Date(); //America/Bogota time zone expected.
-            //seconds since Sun @ 00:00:00
-            //secondsSinceWeekStarted = date.getDay()*86400 + date.getHours()*3600 + date.getMinutes()*60 + date.getSeconds();
-            
-            
-            //console.log(branches)
-            /*if(cart){
-                return cart.getProducts().then(products =>{
-                    let total = 0
-                    for(let i = 0; i < products.length; i++){
-                        total += products[i].price * products[i].productsshoppingcart.ammount
-                    }
-                    return {cartExists: true, cartProducts: products, total: total}
-                }).catch(err => {
-                    return { error: err }
-                });
-            }else{
-                return {cartExists: false, message: 'No hay items en el carrito'}
-            }*/
-            
     }
 
 }

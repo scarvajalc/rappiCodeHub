@@ -46,3 +46,27 @@ insert into openinghours (branch_id, opening_time, closing_time) values (4, 3024
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 388800, 439200);
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 475200, 525600);
 insert into openinghours (branch_id, opening_time, closing_time) values (4, 561600, 612000);
+
+insert into products (id, name, price, description) values (1, 'Arroz con pollo', 20000, 'Incluye papas y gaseosa.');
+insert into products (id, name, price, description) values (2, 'Pollo asado + Papas + Gaseosa', 30000, 'Papas frita y gaseosa pequeña.');
+insert into products (id, name, price, description) values (3, 'Pollo broaster + Papas + Gaseosa', 32000, 'Papas frita y gaseosa pequeña.');
+insert into products (id, name, price, description) values (4, 'Hamburguesa con queso + Papas + Gaseosa', 25000, 'Hamburguesa de 100 gr.');
+insert into products (id, name, price, description) values (5, 'Hamburguesa doble + Papas + Gaseosa', 25000, 'Hamburguesa de 200 gr.');
+insert into products (id, name, price, description) values (6, 'Krusty Hamburguesa', 25000, 'Sin adiciones.');
+
+insert into branchproducts (product_id, branch_id, stock) values (1, 1, 10);
+insert into branchproducts (product_id, branch_id, stock) values (2, 1, 10);
+insert into branchproducts (product_id, branch_id, stock) values (3, 1, 10);
+insert into branchproducts (product_id, branch_id, stock) values (1, 2, 5);
+insert into branchproducts (product_id, branch_id, stock) values (2, 2, 5);
+insert into branchproducts (product_id, branch_id, stock) values (3, 2, 0);
+insert into branchproducts (product_id, branch_id, stock) values (1, 2, 0);
+insert into branchproducts (product_id, branch_id, stock) values (2, 2, 0);
+insert into branchproducts (product_id, branch_id, stock) values (3, 2, 12);
+insert into branchproducts (product_id, branch_id, stock) values (4, 4, 50);
+insert into branchproducts (product_id, branch_id, stock) values (5, 5, 50);
+insert into branchproducts (product_id, branch_id, stock) values (6, 5, 50);
+insert into branchproducts (product_id, branch_id, stock) values (5, 6, 50);
+insert into branchproducts (product_id, branch_id, stock) values (6, 6, 0);
+insert into branchproducts (product_id, branch_id, stock) values (5, 7, 0);
+insert into branchproducts (product_id, branch_id, stock) values (6, 7, 50);
