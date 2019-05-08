@@ -5,6 +5,17 @@ const branchHandle = {
     };
 
     return branchData;
+  },
+
+  handleHTTPCheckCartProducts(req) {
+    var cartProductsData = [];
+    for (var i = 0; i < req[0].cartproducts.length; i++) {
+      cartProductsData.push({
+        product_id: req[0].cartproducts[i].dataValues.product.dataValues.id,
+        quantity: req[0].dataValues.cartproducts[i].dataValues.quantity
+      });
+    }
+    return cartProductsData;
   }
 };
 
