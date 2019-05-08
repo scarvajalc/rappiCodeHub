@@ -53,6 +53,21 @@ const branchRepository = {
       ]
     });
     return branchProducts;
+  },
+
+  async checkProducts(cartProducts) {
+    var checkedProducts = [];
+    for (var i = 0; i < cartProducts.length; i++) {
+      checkedProducts.push(
+        await BranchProducts.findAll({
+          where: {
+            product_id: cartProducts[i].product_id
+          },
+          attributes: ["stock", "active"]
+        })
+      );
+    }
+    return checkedProducts;
   }
 };
 
