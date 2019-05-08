@@ -13,4 +13,8 @@ module.exports = app => {
       branchName: branchName
     });
   });
+
+  app.get("/checkProducts", (req, res) => {
+    branchController.checkCartProducts(req, res);
+  });
 };
