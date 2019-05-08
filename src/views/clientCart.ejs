@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="css/flaticon.css" />
     <link rel="stylesheet" href="css/icomoon.css" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/jquery.min.js"></script>
   </head>
   <body>
     <nav
@@ -138,7 +141,9 @@
                             -
                           </button>
                           <span class="price">
-                           <%= cart[0].dataValues.cartproducts[i].dataValues.quantity %>
+                            <%=
+                            cart[0].dataValues.cartproducts[i].dataValues.quantity
+                            %>
                           </span>
                           <button
                             id="<%= cart[0].cartproducts[i].dataValues.product.dataValues.id %>"
@@ -166,7 +171,8 @@
             <div class="col-sm-12 pt-4 text-center ftco-animate">
               <span
                 ><a
-                  href="/clientCart"
+                  id="createOrder"
+                  href=""
                   class="btn btn-primary btn-outline-primary p-3"
                   >Finalizar</a
                 ></span
@@ -204,6 +210,31 @@
           }
         }
       }
+    </script>
+
+    <script>
+      $("#createOrder").click(function(event) {
+        event.preventDefault();
+        swal({
+          title: "¿Todo listo para crear la orden?",
+          icon: "warning",
+          buttons: ["No", "Si"]
+        }).then(confirmed => {
+          $.ajax({
+            url: "/checkProducts",
+            type: "GET"
+          }).then(checkedCartProductsResponse => {
+            if (checkedCartProductsResponse.length > 0) {
+              swal({
+                title: "Su orden no pudo ser creada",
+                text: ``,
+                icon: "error",
+                buttons: ["No", "Si"]
+              });
+            }
+          });
+        });
+      });
     </script>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
