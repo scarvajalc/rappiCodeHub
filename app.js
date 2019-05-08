@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, "src/public")));
 require("./src/app/routes/client")(app);
 require("./src/app/routes/admin")(app);
 require("./src/app/routes/rappiTendero")(app);
-require("./src/app/routes/shoppingcart")(app);
 require("./src/app/routes/restaurant")(app);
+require("./src/app/routes/cart")(app);
 
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
