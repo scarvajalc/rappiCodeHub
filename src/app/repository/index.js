@@ -3,6 +3,8 @@ const Admin = require("../models/admin");
 const RappiTendero = require("../models/rappitendero");
 const ClientAddress = require("../models/client_addresses");
 const CartProduct = require("../models/cartProducts");
+const Cart = require("../models/cart");
+const Product = require("../models/product");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -162,6 +164,29 @@ const repository = {
       }
     });
     return removeProduct;
+  },
+
+  async getClientCart(clientId) {
+    const clientCart = await Cart.findAll({
+      where: {
+        active: true,
+        client_id: clientId
+      },
+      include: [
+        {
+          model: CartProduct,
+          required: true,
+          include: [
+            {
+              model: Product,
+              required: true
+            }
+          ]
+        }
+      ]
+    });
+
+    return clientCart;
   }
 };
 
