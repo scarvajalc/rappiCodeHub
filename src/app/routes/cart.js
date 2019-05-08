@@ -8,4 +8,11 @@ module.exports = app => {
   app.post("/removeFromCart", (req, res) => {
     cartController.removeFromCart(req, res);
   });
+
+  app.get("/clientCart", async (req, res) => {
+    const cart = await cartController.getClientCart(req, res);
+    res.render("clientCart", {
+      cart: cart
+    });
+  });
 };
