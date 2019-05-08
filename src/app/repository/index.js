@@ -2,6 +2,7 @@ const Client = require("../models/client");
 const Admin = require("../models/admin");
 const RappiTendero = require("../models/rappitendero");
 const ClientAddress = require("../models/client_addresses");
+const CartProduct = require("../models/cartProducts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -146,6 +147,21 @@ const repository = {
         longitude: rappiTenderoAddress.longitude
       });
     });
+  },
+
+  async addProductToCart(productData) {
+    const addProduct = await CartProduct.create(productData);
+    return addProduct;
+  },
+
+  async removeProductFromCart(productData) {
+    const removeProduct = await CartProduct.destroy({
+      where: {
+        cart_id: productData.cart_id,
+        product_id: productData.product_id
+      }
+    });
+    return removeProduct;
   }
 };
 
