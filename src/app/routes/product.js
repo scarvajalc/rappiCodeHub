@@ -1,7 +1,7 @@
 const ProductController = require('../controllers/product');
 
 module.exports = app => {
-  app.get("/products", (req, res) => {
+  app.get("/product", (req, res) => {
     ProductController.showProducts(req, res)   
   });
  

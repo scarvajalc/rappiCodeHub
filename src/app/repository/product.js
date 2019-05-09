@@ -13,35 +13,19 @@ const productoRepository = {
           })
         let available_products = []
 
-        for(let i = 0; i < branch_products; i++) {
+        for(let i = 0; i < branch_products.length; i++) {
+            console.log(branch_products[i].stock)
             if (branch_products[i].stock <= 0) continue;
-            
-            product_info = await Products.find({
+            product_info = await Product.findOne({
                 where:{
-                    branch_id: branch,
+                    id: branch_products[i].product_id,
                     active: true
                 }
               })
-            let available_products = []
-    
-
+            available_products.push(product_info)
+            console.log(product_info.name)
         }
-        
-
-
-        for(let i = 0; i < branches.length; i++) {
-            let open_branch = false
-            let current_branch = branches[i]
-            let opening_hours = await current_branch.getHours()
-            for(let j = 0; j < opening_hours.length; j++) {
-                if (opening_hours[j].opening_time <= current_time && 
-                    opening_hours[j].closing_time >= current_time) {
-                    open_branch = true
-                    break
-                }
-            }
-            if (open_branch) open_branches.push(current_branch)
-        }
+                
         return available_products
     }
 

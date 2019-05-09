@@ -217,7 +217,7 @@
               <div class="col-lg-6">
                 
                 <%for(let i=0; i<branches.length; i+=2) {%>
-                <a href="product?branch=<%=branches[i].id%>">
+                <a href="product?branch=<%=branches[i].id%>&branchname=<%=branches[i].name%>">
                 <div class="menus d-flex ftco-animate">s
                   <div class="menu-img" style="background-image: url(images/dish-3.jpg);"></div>
                   <div class="text d-flex">
@@ -235,8 +235,8 @@
 
               <div class="col-lg-6">
                 <%for(let i=1; i<branches.length; i+=2) {%>
-                  <a href="product?branch=<%=branches[i].id%>">
-                  <div class="menus d-flex ftco-animate">
+                <a href="product?branch=<%=branches[i].id%>&branchname=<%=branches[i].name%>">
+                <div class="menus d-flex ftco-animate">
                     <div class="menu-img" style="background-image: url(images/dish-3.jpg);"></div>
                     <div class="text d-flex">
                       <div class="one-half">

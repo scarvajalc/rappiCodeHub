@@ -5,8 +5,8 @@ const productController = {
     let available_products = await productRepository.getAvailableProducts(req.query.branch)
     res.render("product", {
       clientName: req.session.user.first_name,
-      clientAddress: clientAddress,
-      products: available_products
+      products: available_products,
+      branchName: req.query.branchname
   });
 
   }
