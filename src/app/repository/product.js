@@ -14,7 +14,6 @@ const productoRepository = {
         let available_products = []
 
         for(let i = 0; i < branch_products.length; i++) {
-            console.log(branch_products[i].stock)
             if (branch_products[i].stock <= 0) continue;
             product_info = await Product.findOne({
                 where:{
@@ -23,7 +22,6 @@ const productoRepository = {
                 }
               })
             available_products.push(product_info)
-            console.log(product_info.name)
         }
                 
         return available_products
