@@ -68,6 +68,43 @@ const branchRepository = {
       );
     }
     return checkedProducts;
+  },
+
+  async getStoreClosingTime(productId) {
+    const getBranchId = await BranchProducts.findAll({
+      attributes: ["branch_id"],
+      where: {
+        product_id: productId
+      }
+    });
+
+    const branchId = getBranchId[0].dataValues.branch_id;
+    const storeClosingTime = await OpeningHour.findAll({
+      attributes: ["closing_time"],
+      where: {
+        branch_id: branchId
+      },
+      group: ["closing_time"]
+    });
+
+    const closingTime = storeClosingTime[0].dataValues.closing_time;
+    return closingTime;
+  },
+
+  async getBranchCoordinates(branchId) {
+    const getCoordinates = await Branch.findAll({
+      attributes: ["latitude", "longitude"],
+      where: {
+        id: branchId
+      }
+    });
+
+    branchCoordinates = {
+      latitude: getCoordinates[0].dataValues.latitude,
+      longitude: getCoordinates[0].dataValues.longitude
+    };
+
+    return branchCoordinates;
   }
 };
 
