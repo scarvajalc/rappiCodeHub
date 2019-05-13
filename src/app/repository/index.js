@@ -187,6 +187,26 @@ const repository = {
     });
 
     return clientCart;
+  },
+
+  async getAllAvailableRappiT() {
+    const getRappiTenderos = await RappiTendero.findAll({
+      where: {
+        in_order: false
+      }
+    });
+
+    return getRappiTenderos;
+  },
+
+  async getAssignedRappiTendero(rappiTenderoId) {
+    const assignedRappiTendero = await RappiTendero.findAll({
+      where: {
+        id: rappiTenderoId
+      }
+    });
+
+    return assignedRappiTendero;
   }
 };
 
