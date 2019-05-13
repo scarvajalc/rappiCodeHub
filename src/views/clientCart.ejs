@@ -221,15 +221,41 @@
           buttons: ["No", "Si"]
         }).then(confirmed => {
           $.ajax({
-            url: "/checkProducts",
+            url: "/checkStoreTime",
             type: "GET"
-          }).then(checkedCartProductsResponse => {
-            if (checkedCartProductsResponse.length > 0) {
+          }).then(storeOpenResponse => {
+            if (storeOpenResponse.isOpen) {
+              $.ajax({
+                url: "/checkProducts",
+                type: "GET"
+              }).then(checkedCartProductsResponse => {
+                if (checkedCartProductsResponse.length > 0) {
+                  swal({
+                    title: "Su orden no pudo ser creada",
+                    text: ``,
+                    icon: "error"
+                  });
+                } else {
+                  $.ajax({
+                    url: "/searchRappiT",
+                    type: "GET"
+                  }).then(closestRappiTendero => {
+                    console.log(closestRappiTendero);
+                    swal({
+                      title: "Just to check assigned RappiT",
+                      text: `Your RappiT is ${
+                        closestRappiTendero[0].first_name
+                      } ${closestRappiTendero[0].last_name}`,
+                      icon: "success"
+                    });
+                  });
+                }
+              });
+            } else {
               swal({
-                title: "Su orden no pudo ser creada",
-                text: ``,
-                icon: "error",
-                buttons: ["No", "Si"]
+                title: "La tienda ya está cerrada",
+                text: "No se podrá realizar tu pedido",
+                icon: "error"
               });
             }
           });
