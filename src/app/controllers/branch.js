@@ -2,6 +2,7 @@ const branchRepository = require("../repository/branch");
 const branchFunctions = require("../functions/branch");
 const branchHandler = require("../controllers/handlers/branch");
 const repository = require("../repository/index");
+const moment = require("moment");
 
 const branchController = {
   async getAllBranches(req, res) {
@@ -54,6 +55,23 @@ const branchController = {
 
     res.send(checkedCartProductsResponse);
     return checkedCartProductsResponse;
+  },
+
+  async checkStoreTime(req, res) {
+    const storeOpen = {
+      isOpen: false
+    };
+    const clientId = req.session.user.id;
+    const cartProducts = await repository.getClientCart(clientId);
+    const productId =
+      cartProducts[0].dataValues.cartproducts[0].dataValues.product_id;
+    const storeTime = await branchRepository.getStoreClosingTime(productId);
+    /* Something else has to do this */
+    const currentTime = moment().format("HH:mm:ss");
+    if (storeTime >= currentTime) {
+      storeOpen.isOpen = true;
+    }
+    res.send(storeOpen);
   }
 };
 
