@@ -3,7 +3,7 @@ const branchHandle = {
     const branchData = {
       id: req.params.id
     };
-
+    req.session.branch_id = branchData.id;
     return branchData;
   },
 
