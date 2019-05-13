@@ -1,5 +1,7 @@
 const rappiTenderoHandler = require("./handlers/rappiTendero");
 const repository = require("../repository/index");
+const branchRepository = require("../repository/branch");
+const orderFunctions = require("../functions/order");
 
 const rappiTenderoController = {
   async rappiTenderoLogin(req, res) {
@@ -26,6 +28,35 @@ const rappiTenderoController = {
     if (repoResponse.message) {
       res.redirect("/adminRegisterRappiT");
     }
+  },
+
+  async rappiTenderoUpdateAddress(req, res) {
+    const rappiTenderoAddress = rappiTenderoHandler.handleHTTPUpdateAddress(
+      req
+    );
+    repository.rappiTenderoUpdateAddress(rappiTenderoAddress, res);
+  },
+
+  async rappiTenderoGetClosest(req, res) {
+    const branchId = req.session.branch_id;
+    const restaurantCoordinates = await branchRepository.getBranchCoordinates(
+      branchId
+    );
+    const availableRappiTenderos = await repository.getAllAvailableRappiT(
+      restaurantCoordinates,
+      res
+    );
+
+    const closestRappiTendero = orderFunctions.getClosestRappiT(
+      restaurantCoordinates,
+      availableRappiTenderos
+    );
+
+    const assignedRappiTendero = await repository.getAssignedRappiTendero(
+      closestRappiTendero[0].rappiTenderoId
+    );
+
+    res.send(assignedRappiTendero);
   }
 };
 

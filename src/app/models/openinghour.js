@@ -18,10 +18,10 @@ var OpeningHour = database.sequelize.define(
       }
     },
     opening_time: {
-      type: Sequelize.INTEGER
+      type: Sequelize.TIME
     },
     closing_time: {
-      type: Sequelize.INTEGER
+      type: Sequelize.TIME
     },
     createdAt: {
       type: Sequelize.DATE,
@@ -42,7 +42,11 @@ var OpeningHour = database.sequelize.define(
   }
 );
 
-Branch.hasMany(OpeningHour, { foreignKey: "branch_id", sourceKey: "id" });
+Branch.hasMany(OpeningHour, {
+  as: "hours",
+  foreignKey: "branch_id",
+  sourceKey: "id"
+});
 OpeningHour.belongsTo(Branch, { foreignKey: "branch_id", targetKey: "id" });
 
 module.exports = OpeningHour;

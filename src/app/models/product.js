@@ -1,7 +1,5 @@
 const Sequelize = require("sequelize");
 const database = require("../database");
-const Branch = require("../models/branch");
-const BranchProduct = require("../models/branchproduct");
 const Category = require("../models/category");
 const CategoryProduct = require("../models/categoryproduct");
 
@@ -34,6 +32,9 @@ var Product = database.sequelize.define(
     },
     active: {
       type: Sequelize.BOOLEAN
+    },
+    img_url: {
+      type: Sequelize.STRING
     }
   },
   {

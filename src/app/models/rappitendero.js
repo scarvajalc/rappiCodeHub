@@ -36,6 +36,15 @@ module.exports = database.sequelize.define(
     },
     active: {
       type: Sequelize.BOOLEAN
+    },
+    latitude: {
+      type: Sequelize.STRING
+    },
+    longitude: {
+      type: Sequelize.STRING
+    },
+    in_order: {
+      type: Sequelize.BOOLEAN
     }
   },
   {

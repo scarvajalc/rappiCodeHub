@@ -43,4 +43,8 @@ module.exports = app => {
       res.redirect("/rappiTenderoLogin");
     }
   });
+
+  app.put("/rappiTenderoUpdateCurrentAddress", (req, res) => {
+    rappiTenderoController.rappiTenderoUpdateAddress(req, res);
+  });
 };

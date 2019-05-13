@@ -1,8 +1,6 @@
 const Sequelize = require("sequelize");
 const database = require("../database");
 const RestaurantChain = require("../models/restaurantchain");
-const Product = require("../models/product");
-const BranchProduct = require("../models/branchproduct");
 
 var Branch = database.sequelize.define(
   "branch",
@@ -41,6 +39,9 @@ var Branch = database.sequelize.define(
     },
     active: {
       type: Sequelize.BOOLEAN
+    },
+    url_image: {
+      type: Sequelize.STRING
     }
   },
   {
@@ -55,13 +56,6 @@ RestaurantChain.hasMany(Branch, {
 Branch.belongsTo(RestaurantChain, {
   foreignKey: "restaurantchain_id",
   targetKey: "id"
-});
-
-Branch.belongsToMany(Product, {
-  through: BranchProduct,
-  as: "products",
-  foreignKey: "branch_id",
-  otherKey: "product_id"
 });
 
 module.exports = Branch;

@@ -198,6 +198,46 @@
       });
     </script>
 
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row no-gutters justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2>Restaurantes</h2>
+          </div>
+        </div>
+
+        <div class="row d-flex no-gutters">
+          <% for(let i=0; i < branches.length; i++) {%>
+          <div class="col-lg-6">
+            <div class="block-3 d-md-flex ftco-animate">
+              <div
+                class="image order-last"
+                style="background-image: url('<%= branches[i].branch.dataValues.url_image %>');"
+              ></div>
+              <div class="text text-center order-first">
+                <h2 class="heading">
+                  <%= branches[i].branch.dataValues.name %>
+                </h2>
+                <p>
+                  <%= branches[i].branch.dataValues.address %>
+                </p>
+                <span class="price"
+                  >CIERRA A LAS <%=
+                  branches[i].branch.dataValues.hours[0].dataValues.closing_time
+                  %></span
+                >
+                <hr />
+                <a href="/product/<%= branches[i].branch.dataValues.id %>"
+                  >Visitar</a
+                >
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row">

@@ -2,6 +2,9 @@ const Client = require("../models/client");
 const Admin = require("../models/admin");
 const RappiTendero = require("../models/rappitendero");
 const ClientAddress = require("../models/client_addresses");
+const CartProduct = require("../models/cartProducts");
+const Cart = require("../models/cart");
+const Product = require("../models/product");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -133,6 +136,77 @@ const repository = {
       .catch(err => {
         return { error: err };
       });
+  },
+
+  rappiTenderoUpdateAddress(rappiTenderoAddress) {
+    RappiTendero.findOne({
+      where: {
+        id: rappiTenderoAddress.id
+      }
+    }).then(rappiTendero => {
+      rappiTendero.update({
+        latitude: rappiTenderoAddress.latitude,
+        longitude: rappiTenderoAddress.longitude
+      });
+    });
+  },
+
+  async addProductToCart(productData) {
+    const addProduct = await CartProduct.create(productData);
+    return addProduct;
+  },
+
+  async removeProductFromCart(productData) {
+    const removeProduct = await CartProduct.destroy({
+      where: {
+        cart_id: productData.cart_id,
+        product_id: productData.product_id
+      }
+    });
+    return removeProduct;
+  },
+
+  async getClientCart(clientId) {
+    const clientCart = await Cart.findAll({
+      where: {
+        active: true,
+        client_id: clientId
+      },
+      include: [
+        {
+          model: CartProduct,
+          required: true,
+          include: [
+            {
+              model: Product,
+              required: true
+            }
+          ]
+        }
+      ]
+    });
+
+    return clientCart;
+  },
+
+  async getAllAvailableRappiT() {
+    const getRappiTenderos = await RappiTendero.findAll({
+      where: {
+        in_order: false
+      }
+    });
+
+    return getRappiTenderos;
+  },
+
+  async getAssignedRappiTendero(rappiTenderoId) {
+    const assignedRappiTendero = await RappiTendero.findAll({
+      where: {
+        id: rappiTenderoId
+      }
+    });
+
+    return assignedRappiTendero;
   }
 };
 
