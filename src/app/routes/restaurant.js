@@ -17,4 +17,8 @@ module.exports = app => {
   app.get("/checkProducts", (req, res) => {
     branchController.checkCartProducts(req, res);
   });
+
+  app.get("/checkStoreTime", (req, res) => {
+    branchController.checkStoreTime(req, res);
+  });
 };
