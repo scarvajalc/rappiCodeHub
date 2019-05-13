@@ -35,6 +35,7 @@ require("./src/app/routes/admin")(app);
 require("./src/app/routes/rappiTendero")(app);
 require("./src/app/routes/restaurant")(app);
 require("./src/app/routes/cart")(app);
+require("./src/app/routes/order")(app);
 
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
