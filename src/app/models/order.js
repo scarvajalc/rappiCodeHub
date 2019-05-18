@@ -62,11 +62,11 @@ var Order = database.sequelize.define(
 );
 Order.belongsTo(Client, { foreignKey: "client_id" });
 
-Order.hasOne(ClientAdress, { foreignKey: "client_address_id" });
+Order.belongsTo(ClientAdress, { foreignKey: "client_address_id" });
 
-Order.hasOne(Branch, { foreignKey: "branch_id" });
+Order.belongsTo(Branch, { foreignKey: "branch_id" });
 
-Order.hasOne(RappiTendero, { foreignKey: "rt_id" });
+Order.belongsTo(RappiTendero, { foreignKey: "rt_id" });
 
 Order.belongsToMany(Product, {
   through: Ordersproduct,
