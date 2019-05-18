@@ -169,14 +169,24 @@
               </div>
             </div>
             <div class="col-sm-12 pt-4 text-center ftco-animate">
-              <span
-                ><a
-                  id="createOrder"
-                  href=""
-                  class="btn btn-primary btn-outline-primary p-3"
-                  >Finalizar</a
-                ></span
-              >
+              <span>
+                <form action="/createorder" method="POST">
+                  <!-- <input
+                    id="orderTotal"
+                    name="orderTotal"
+                    type="hidden"
+                    value="<%= orderTotal %>"
+                  /> -->
+
+                  <input
+                    class="btn btn-primary py-3 px-5"
+                    type="submit"
+                    value="Crear Orden"
+                  />
+
+                  <%}%>
+                </form>
+              </span>
             </div>
           </div>
         </div>
