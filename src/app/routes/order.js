@@ -5,7 +5,7 @@ module.exports = app => {
   app.get("/searchRappiT", (req, res) => {
     rappiTenderoController.rappiTenderoGetClosest(req, res);
   });
-  app.post("/createorder", (req, res) => {
+  app.get("/createOrder", (req, res) => {
     orderController.createOrder(req, res);
   });
 };
