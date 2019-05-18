@@ -6,11 +6,11 @@ const orderRepo = require("../repository/order");
 
 const order = {
   async createOrder(req, res) {
-    console.log("Eeeeeeeeeeeeeee");
+    console.log("Eeeeeeeeeeeeeeee");
     //let total = req.body.orderTotal;
     let userId = req.session.user.id;
     let addressId = req.session.address.id;
-    await orderRepo.createOrder(total, userId, addressId);
+    await orderRepo.createOrder(12, userId, addressId);
 
     res.redirect("/clientHome");
   }
