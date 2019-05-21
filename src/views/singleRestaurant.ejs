@@ -106,7 +106,13 @@
                 aria-labelledby="v-pills-home-tab"
               >
                 <div class="row">
-                  <% for(let i=0; i < storeProducts.length; i++) {%>
+                  <% if(storeProducts.length == 0) { %>
+                  <h2>
+                    El restaurante seleccionado no tiene actualmente comida
+                    disponible.
+                  </h2>
+                  <% } else { %> <% for(let i=0; i < storeProducts.length; i++)
+                  {%>
 
                   <div class="col-lg-6">
                     <div class="menus d-flex ftco-animate">
@@ -139,7 +145,7 @@
                       </div>
                     </div>
                   </div>
-                  <% } %>
+                  <% } %> <% } %>
                 </div>
               </div>
             </div>
