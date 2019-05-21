@@ -6,8 +6,13 @@ module.exports = app => {
   });
 
   app.get("/singleRestaurant", (req, res) => {
-    const branchName = req.session.products[0].name;
-    const branchProducts = req.session.products[0].branchproducts;
+    if (req.session.products.length != 0) {
+      var branchProducts = req.session.products[0].branchproducts;
+      var branchName = req.session.products[0].name;
+    } else {
+      var branchProducts = [];
+      var branchName = [];
+    }
     res.render("singleRestaurant", {
       storeProducts: branchProducts,
       branchName: branchName
