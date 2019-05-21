@@ -45,7 +45,7 @@
       id="ftco-navbar"
     >
       <div class="container">
-        <a class="navbar-brand" href="index.html">Rappi</a>
+        <a class="navbar-brand" href="/clientHome">Rappi</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -207,7 +207,9 @@
         </div>
 
         <div class="row d-flex no-gutters">
-          <% for(let i=0; i < branches.length; i++) {%>
+          <% if(branches.length == 0) { %>
+          <h2>Lo sentimos, en el momento no hay ningúna tienda abierta puedes regresar en un par de horas</h2>
+          <% } else { %> <% for(let i=0; i < branches.length; i++) {%>
           <div class="col-lg-6">
             <div class="block-3 d-md-flex ftco-animate">
               <div
@@ -233,7 +235,7 @@
               </div>
             </div>
           </div>
-          <% } %>
+          <% } %> <% } %>
         </div>
       </div>
     </section>
