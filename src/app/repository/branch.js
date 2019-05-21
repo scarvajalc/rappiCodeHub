@@ -43,10 +43,16 @@ const branchRepository = {
         {
           model: BranchProducts,
           required: true,
+          where: {
+            active: true
+          },
           include: [
             {
               model: Products,
-              required: true
+              required: true,
+              where: {
+                active: true
+              }
             }
           ]
         }
