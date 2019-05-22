@@ -14,10 +14,24 @@ const order = {
         userId,
         addressId
       );
-    } catch (error) {}
-    if (orderRepoResponse.orderCreated) {
+      if (orderRepoResponse.orderCreated) {
+        res.render("orderResponse", {
+          orderOk: true,
+          msg: "Orden Creada Correctamente"
+        });
+      } else {
+        res.render("orderResponse", {
+          orderOk: false,
+          msg:
+            "Tu orden no pudo ser creada, el restaurante está cerrado o no tiene los productos que solicitas"
+        });
+      }
+    } catch (error) {
+      res.render("orderResponse", {
+        orderOk: false,
+        msg: "Error creando la orden, intenta mas tarde"
+      });
     }
-    //res.redirect("/clientHome");
   },
 
   async prueba(req, res) {
