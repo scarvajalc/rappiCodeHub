@@ -2,6 +2,7 @@ const Branch = require("../models/branch");
 const OpeningHour = require("../models/openinghour");
 const BranchProducts = require("../models/branchproduct");
 const Products = require("../models/product");
+const repository = require("../repository/index");
 const moment = require("moment");
 const { Op } = require("sequelize");
 
@@ -105,6 +106,75 @@ const branchRepository = {
     };
 
     return branchCoordinates;
+  },
+
+  async getCartBranchId(clientId) {
+    const cartProducts = await repository.getClientCart(clientId);
+    const productId =
+      cartProducts[0].dataValues.cartproducts[0].dataValues.product_id;
+    const branchId = await BranchProducts.findAll({
+      attributes: ["branch_id"],
+      where: {
+        product_id: productId
+      }
+    });
+
+    return branchId[0].dataValues.branch_id;
+  },
+
+  async checkStoreTime(clientId) {
+    const storeOpen = {
+      isOpen: false
+    };
+    const cartProducts = await repository.getClientCart(clientId);
+    const productId =
+      cartProducts[0].dataValues.cartproducts[0].dataValues.product_id;
+    const storeTime = await branchRepository.getStoreClosingTime(productId);
+    const currentTime = moment().format("HH:mm:ss");
+    if (storeTime >= currentTime) {
+      storeOpen.isOpen = true;
+    }
+    return storeOpen;
+  },
+
+  async checkCartProducts(clientId) {
+    const productsAvailable = {
+      allProductsAvailable: false,
+      noStockProducts: []
+    };
+    const cartProducts = await repository.getClientCart(clientId);
+    var cartProductsDataToFilter = [];
+    for (var i = 0; i < cartProducts[0].cartproducts.length; i++) {
+      cartProductsDataToFilter.push({
+        product_id:
+          cartProducts[0].cartproducts[i].dataValues.product.dataValues.id,
+        quantity: cartProducts[0].dataValues.cartproducts[i].dataValues.quantity
+      });
+    }
+    const checkedProducts = await branchRepository.checkProducts(
+      cartProductsDataToFilter
+    );
+
+    var checkedCartProductsResponse = [];
+    for (var i = 0; i < checkedProducts.length; i++) {
+      if (
+        cartProductsDataToFilter[i].quantity >
+          checkedProducts[i][0].dataValues.stock ||
+        !checkedProducts[i][0].dataValues.active
+      ) {
+        checkedCartProductsResponse.push(
+          `${
+            cartProducts[0].cartproducts[i].dataValues.product.dataValues.name
+          } se ha acabado`
+        );
+      }
+    }
+    productsAvailable.noStockProducts = checkedCartProductsResponse;
+    if (checkedCartProductsResponse.length == 0) {
+      productsAvailable.allProductsAvailable = true;
+    }
+
+    return productsAvailable;
   }
 };
 

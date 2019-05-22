@@ -6,13 +6,24 @@ const orderRepo = require("../repository/order");
 
 const order = {
   async createOrder(req, res) {
-    console.log("Eeeeeeeeeeeeeeee");
     //let total = req.body.orderTotal;
     let userId = req.session.user.id;
     let addressId = req.session.address.id;
-    await orderRepo.createOrder(12, userId, addressId);
+    try {
+      const orderRepoResponse = await orderRepo.startOrderProcess(
+        userId,
+        addressId
+      );
+    } catch (error) {}
+    if (orderRepoResponse.orderCreated) {
+    }
+    //res.redirect("/clientHome");
+  },
 
-    res.redirect("/clientHome");
+  async prueba(req, res) {
+    let userId = 7;
+    await orderRepo.getOrderTotalPrice(7);
+    res.send("lel");
   }
 };
 

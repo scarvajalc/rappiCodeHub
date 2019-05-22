@@ -8,4 +8,7 @@ module.exports = app => {
   app.get("/createOrder", (req, res) => {
     orderController.createOrder(req, res);
   });
+  app.get("/prueba", (req, res) => {
+    orderController.prueba(req, res);
+  });
 };

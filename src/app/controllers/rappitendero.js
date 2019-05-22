@@ -35,9 +35,9 @@ const rappiTenderoController = {
       req
     );
     repository.rappiTenderoUpdateAddress(rappiTenderoAddress, res);
-  },
+  }
 
-  async rappiTenderoGetClosest(req, res) {
+  /*async rappiTenderoGetClosest(req, res) {
     const branchId = req.session.branch_id;
     const restaurantCoordinates = await branchRepository.getBranchCoordinates(
       branchId
@@ -57,7 +57,7 @@ const rappiTenderoController = {
     );
 
     res.send(assignedRappiTendero);
-  }
+  }*/
 };
 
 module.exports = rappiTenderoController;
