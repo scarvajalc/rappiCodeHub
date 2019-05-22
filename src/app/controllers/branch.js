@@ -25,9 +25,9 @@ const branchController = {
     );
     req.session.products = branchProducts;
     res.redirect("/singleRestaurant");
-  },
+  }
 
-  async checkCartProducts(req, res) {
+  /*async checkCartProducts(req, res) {
     const clientId = req.session.user.id;
     const cartProducts = await repository.getClientCart(clientId);
     const cartProductsDataToFilter = branchHandler.handleHTTPCheckCartProducts(
@@ -36,8 +36,7 @@ const branchController = {
     const checkedProducts = await branchRepository.checkProducts(
       cartProductsDataToFilter
     );
-    /* 100% se que esto debe ir en otro lugar pero son las 2:56 AM
-    y quiero acabar la funcionalidad */
+    
     var checkedCartProductsResponse = [];
     for (var i = 0; i < checkedProducts.length; i++) {
       if (
@@ -55,9 +54,9 @@ const branchController = {
 
     res.send(checkedCartProductsResponse);
     return checkedCartProductsResponse;
-  },
+  }*/
 
-  async checkStoreTime(req, res) {
+  /*async checkStoreTime(req, res) {
     const storeOpen = {
       isOpen: false
     };
@@ -66,13 +65,13 @@ const branchController = {
     const productId =
       cartProducts[0].dataValues.cartproducts[0].dataValues.product_id;
     const storeTime = await branchRepository.getStoreClosingTime(productId);
-    /* Something else has to do this */
+    
     const currentTime = moment().format("HH:mm:ss");
     if (storeTime >= currentTime) {
       storeOpen.isOpen = true;
     }
     res.send(storeOpen);
-  }
+  }*/
 };
 
 module.exports = branchController;

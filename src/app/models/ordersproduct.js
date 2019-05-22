@@ -24,7 +24,7 @@ var Ordersproduct = database.sequelize.define(
         key: "id"
       }
     },
-    amount: {
+    quantity: {
       type: Sequelize.INTEGER
     },
     createdAt: {
