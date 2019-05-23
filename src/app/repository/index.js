@@ -32,19 +32,12 @@ const repository = {
       });
   },
 
-  clientRegister(clientData, res) {
-    return bcrypt.hash(clientData.password, 10).then(hash => {
-      clientData.password = hash;
-      return Client.create(clientData)
-        .then(client => {
-          return { message: `${client.email} registered` };
-        })
-        .catch(err => {
-          return { error: err };
-        });
-    });
+  async clientRegister(clientData) {
+    const encryptedClientPassword = await bcrypt.hash(clientData.password, 10);
+    clientData.password = encryptedClientPassword;
+    return (registeredClient = await Client.create(clientData));
   },
-
+  
   clientLogin(clientData, res) {
     Client.hasMany(ClientAddress, { foreignKey: "client_id" });
     ClientAddress.belongsTo(Client, { foreignKey: "id" });
