@@ -1,7 +1,7 @@
 const cartHandler = {
-  handleHTTPAddToCart(req) {
+  handleHTTPAddToCart(req, clientCartId) {
     const productData = {
-      cart_id: 1,
+      cart_id: clientCartId,
       product_id: req.body.productId,
       quantity: 1
     };
