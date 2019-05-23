@@ -4,16 +4,20 @@ const repository = require("../repository/index");
 const clientController = {
   async clientLogin(req, res) {
     const clientData = clientHandler.handleHTTPLogin(req);
-    const repoResponse = await repository.clientLogin(clientData, res);
-    if (repoResponse.validCredentials) {
-      if (repoResponse.clientData.client_addresses[0] == undefined) {
+    const loggedClientWithAddress = await repository.clientLogin(
+      clientData,
+      res
+    );
+    console.log(loggedClientWithAddress);
+    if (loggedClientWithAddress) {
+      if (loggedClientWithAddress.dataValues.client_addresses[0] == undefined) {
         req.session.address = "";
       } else {
         req.session.address =
-          repoResponse.clientData.client_addresses[0].dataValues;
+          loggedClientWithAddress.dataValues.client_addresses[0].dataValues;
       }
-      req.session.user = repoResponse.clientData;
-      req.session.user_role = repoResponse.role;
+      req.session.user = loggedClientWithAddress.dataValues;
+      req.session.user_role = "client";
       res.redirect("/clientHome");
     } else {
       res.redirect("/clientLogin");
