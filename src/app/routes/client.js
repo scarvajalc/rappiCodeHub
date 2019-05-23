@@ -33,14 +33,11 @@ module.exports = app => {
       req.session.user_role === "client"
     ) {
       var clientAddress = "";
+      var orderedOpenBranches = "";
       if (req.session.address.address_name != undefined) {
         clientAddress = req.session.address.address_name;
+        orderedOpenBranches = await branchController.getAllBranches(req, res);
       }
-
-      const orderedOpenBranches = await branchController.getAllBranches(
-        req,
-        res
-      );
 
       res.render("clientHome", {
         clientName: req.session.user.first_name,
