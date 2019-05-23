@@ -3,7 +3,12 @@ const repository = require("../repository/index");
 
 const cartController = {
   async addToCart(req, res) {
-    const productData = cartHandler.handleHTTPAddToCart(req);
+    clientId = req.session.user.id;
+    const clientCartId = await repository.getClientCartId(clientId);
+    const productData = cartHandler.handleHTTPAddToCart(
+      req,
+      clientCartId[0].dataValues.id
+    );
     const repoResponse = await repository.addProductToCart(productData);
   },
 
