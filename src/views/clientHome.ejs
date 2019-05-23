@@ -207,8 +207,16 @@
         </div>
 
         <div class="row d-flex no-gutters">
-          <% if(branches.length == 0) { %>
-          <h2>Lo sentimos, en el momento no hay ningúna tienda abierta puedes regresar en un par de horas</h2>
+          <% if(branches.length == 0 && clientAddress.length == 0) { %>
+          <h2>
+            Por favor registra una dirección para que puedas ver los mejores
+            restaurantes cerca de ti
+          </h2>
+          <% } %> <% if(branches.length == 0 && clientAddress > 0) { %>
+          <h2>
+            Lo sentimos, en el momento no hay ningúna tienda abierta puedes
+            regresar en un par de horas
+          </h2>
           <% } else { %> <% for(let i=0; i < branches.length; i++) {%>
           <div class="col-lg-6">
             <div class="block-3 d-md-flex ftco-animate">
