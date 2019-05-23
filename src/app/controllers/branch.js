@@ -7,8 +7,12 @@ const moment = require("moment");
 const branchController = {
   async getAllBranches(req, res) {
     const clientCoordinates = {
-      latitude: req.session.user.client_addresses[0].latitude,
-      longitude: req.session.user.client_addresses[0].longitude
+      latitude:
+        req.session.address.latitude ||
+        req.session.user.client_addresses[0].latitude,
+      longitude:
+        req.session.address.longitude ||
+        req.session.user.client_addresses[0].longitude
     };
     const openBranches = await branchRepository.getOpenBranches();
     const orderedOpenBranches = await branchFunctions.orderBranchesByDistance(
