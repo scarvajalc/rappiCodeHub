@@ -37,7 +37,12 @@ const repository = {
   async clientRegister(clientData) {
     const encryptedClientPassword = await bcrypt.hash(clientData.password, 10);
     clientData.password = encryptedClientPassword;
-    return (registeredClient = await Client.create(clientData));
+    registeredClient = await Client.create(clientData);
+    await Cart.create({
+      client_id: registeredClient.dataValues.id,
+      active: true
+    });
+    return registeredClient;
   },
 
   async clientLogin(clientData) {
@@ -197,6 +202,15 @@ const repository = {
     });
 
     return assignedRappiTendero;
+  },
+
+  async getClientCartId(clientId) {
+    return (clientCartId = await Cart.findAll({
+      attributes: ["id"],
+      where: {
+        client_id: clientId
+      }
+    }));
   }
 };
 
