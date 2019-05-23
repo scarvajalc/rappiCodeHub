@@ -34,6 +34,12 @@ const order = {
     }
   },
 
+  async showOrderDetails(req, res) {
+    let userId = req.session.user.id;
+    let orderData = await orderRepo.getOrderData(userId);
+    res.render("orderInProgress", orderData);
+  },
+
   async prueba(req, res) {
     let userId = 7;
     await orderRepo.getOrderTotalPrice(7);

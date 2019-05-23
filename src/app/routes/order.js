@@ -11,4 +11,7 @@ module.exports = app => {
   app.get("/prueba", (req, res) => {
     orderController.prueba(req, res);
   });
+  app.get("/orderInProcess", (req, res) => {
+    orderController.showOrderDetails(req, res);
+  });
 };

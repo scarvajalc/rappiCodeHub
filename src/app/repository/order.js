@@ -105,6 +105,40 @@ const orderRepository = {
       total += cartProducts[i].product.price;
     }
     return total + deliveryFee;
+  },
+
+  async userHaveOrderInProgress(userId) {
+    userOrders = await Order.findAll({
+      where: {
+        client_id: userId
+      }
+    });
+    if (userOrders.length > 0) {
+      return true;
+    }
+    return false;
+  },
+
+  async getOrderData(userId) {
+    order = await Order.findAll({
+      where: {
+        client_id: userId
+      }
+    });
+
+    order = order[0];
+    client = await order.getClient();
+    store = await order.getBranch();
+    rt = await order.getRappitendero();
+    products = await order.getProducts();
+    orderData = {
+      rtName: rt.first_name + " " + rt.last_name,
+      clientName: client.first_name + " " + client.last_name,
+      storeName: store.name,
+      total: order.total,
+      products: products
+    };
+    return orderData;
   }
 };
 
