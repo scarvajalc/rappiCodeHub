@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 const database = require("../database");
+const ClientAddress = require("../models/client_addresses");
 
-module.exports = database.sequelize.define(
+var Client = database.sequelize.define(
   "client",
   {
     id: {
@@ -42,3 +43,8 @@ module.exports = database.sequelize.define(
     timestamps: false
   }
 );
+
+Client.hasMany(ClientAddress, { foreignKey: "client_id" });
+ClientAddress.belongsTo(Client, { foreignKey: "id" });
+
+module.exports = Client;
