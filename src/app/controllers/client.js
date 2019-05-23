@@ -8,7 +8,6 @@ const clientController = {
       clientData,
       res
     );
-    console.log(loggedClientWithAddress);
     if (loggedClientWithAddress) {
       if (loggedClientWithAddress.dataValues.client_addresses[0] == undefined) {
         req.session.address = "";
