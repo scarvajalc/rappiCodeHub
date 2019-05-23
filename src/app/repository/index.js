@@ -17,16 +17,20 @@ const repository = {
       }
     });
 
-    const encryptedPasswordAndAdminPasswordMatch = await bcrypt.compareSync(
-      adminData.password,
-      adminPasswordEncrypted.dataValues.password
-    );
-    if (encryptedPasswordAndAdminPasswordMatch) {
-      return (loggedAdmin = await Admin.findOne({
-        where: {
-          email: adminData.email
-        }
-      }));
+    if (adminPasswordEncrypted) {
+      const encryptedPasswordAndAdminPasswordMatch = await bcrypt.compareSync(
+        adminData.password,
+        adminPasswordEncrypted.dataValues.password
+      );
+      if (encryptedPasswordAndAdminPasswordMatch) {
+        return (loggedAdmin = await Admin.findOne({
+          where: {
+            email: adminData.email
+          }
+        }));
+      }
+    } else {
+      return null;
     }
   },
 
@@ -36,35 +40,30 @@ const repository = {
     return (registeredClient = await Client.create(clientData));
   },
 
-  clientLogin(clientData, res) {
-    Client.hasMany(ClientAddress, { foreignKey: "client_id" });
-    ClientAddress.belongsTo(Client, { foreignKey: "id" });
-
-    return Client.findOne({
+  async clientLogin(clientData) {
+    const clientPasswordEncrypted = await Client.findOne({
+      attributes: ["password"],
       where: {
         email: clientData.email
-      },
-      include: [ClientAddress]
-    })
-      .then(client => {
-        if (client) {
-          if (bcrypt.compareSync(clientData.password, client.password)) {
-            let token = jwt.sign(client.dataValues, process.env.SECRET_KEY, {
-              expiresIn: 1500
-            });
-            return {
-              validCredentials: true,
-              clientData: client,
-              role: "client"
-            };
-          }
-        } else {
-          return { validCredentials: false, message: "Client does not exists" };
-        }
-      })
-      .catch(err => {
-        return { error: err };
-      });
+      }
+    });
+
+    if (clientPasswordEncrypted) {
+      const encryptedPasswordAndClientPasswordMatch = await bcrypt.compareSync(
+        clientData.password,
+        clientPasswordEncrypted.dataValues.password
+      );
+      if (encryptedPasswordAndClientPasswordMatch) {
+        return (loggedClientWithAddress = await Client.findOne({
+          where: {
+            email: clientData.email
+          },
+          include: [ClientAddress]
+        }));
+      }
+    } else {
+      return null;
+    }
   },
 
   rappiTenderoRegister(rappiTenderoData, res) {
