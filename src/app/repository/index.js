@@ -9,27 +9,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const repository = {
-  adminLogin(adminData, res) {
-    return Admin.findOne({
+  async adminLogin(adminData) {
+    const adminPasswordEncrypted = await Admin.findOne({
+      attributes: ["password"],
       where: {
         email: adminData.email
       }
-    })
-      .then(admin => {
-        if (admin) {
-          if (bcrypt.compareSync(adminData.password, admin.password)) {
-            let token = jwt.sign(admin.dataValues, process.env.SECRET_KEY, {
-              expiresIn: 1500
-            });
-            return { validCredentials: true, adminData: admin, role: "admin" };
-          }
-        } else {
-          return { validCredentials: false, message: "Admin does not exists" };
+    });
+
+    const encryptedPasswordAndAdminPasswordMatch = await bcrypt.compareSync(
+      adminData.password,
+      adminPasswordEncrypted.dataValues.password
+    );
+    if (encryptedPasswordAndAdminPasswordMatch) {
+      return (loggedAdmin = await Admin.findOne({
+        where: {
+          email: adminData.email
         }
-      })
-      .catch(err => {
-        return { error: err };
-      });
+      }));
+    }
   },
 
   async clientRegister(clientData) {
@@ -37,7 +35,7 @@ const repository = {
     clientData.password = encryptedClientPassword;
     return (registeredClient = await Client.create(clientData));
   },
-  
+
   clientLogin(clientData, res) {
     Client.hasMany(ClientAddress, { foreignKey: "client_id" });
     ClientAddress.belongsTo(Client, { foreignKey: "id" });
