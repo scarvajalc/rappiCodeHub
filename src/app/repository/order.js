@@ -78,6 +78,10 @@ const orderRepository = {
     );
   },
 
+  async changeOrderStatus(orderId, status) {
+    await Order.update({ status: status }, { where: { id: orderId } });
+  },
+
   async rappiTenderoGetClosest(branchId) {
     const restaurantCoordinates = await branchRepository.getBranchCoordinates(
       branchId
@@ -102,28 +106,49 @@ const orderRepository = {
     const cartResponse = await repository.getClientCart(userId);
     const cartProducts = cartResponse[0].cartproducts;
     for (let i = 0; i < cartProducts.length; i++) {
-      total += cartProducts[i].product.price;
+      total += parseInt(cartProducts[i].product.price);
     }
-    return total + deliveryFee;
+    return parseInt(total) + parseInt(deliveryFee);
   },
 
-  async userHaveOrderInProgress(userId) {
+  async userHaveOrderInProgress(userId, role) {
+    if (role == "rappiTendero") {
+      userData = {
+        rt_id: userId,
+        status: true
+      };
+    }
+    if (role == "client") {
+      userData = {
+        client_id: userId,
+        status: true
+      };
+    }
     userOrders = await Order.findAll({
-      where: {
-        client_id: userId
-      }
+      where: userData
     });
+
     if (userOrders.length > 0) {
       return true;
     }
     return false;
   },
 
-  async getOrderData(userId) {
+  async getOrderData(userId, role) {
+    if (role == "rappiTendero") {
+      userData = {
+        rt_id: userId,
+        status: true
+      };
+    }
+    if (role == "client") {
+      userData = {
+        client_id: userId,
+        status: true
+      };
+    }
     order = await Order.findAll({
-      where: {
-        client_id: userId
-      }
+      where: userData
     });
 
     order = order[0];
@@ -139,6 +164,18 @@ const orderRepository = {
       products: products
     };
     return orderData;
+  },
+
+  async endOrder(userId) {
+    await orderRepository.changeRappiTenderoInOrderStatus(userId, false);
+    order = await Order.findAll({
+      where: {
+        rt_id: userId,
+        status: true
+      }
+    });
+    orderId = order[0].id;
+    await orderRepository.changeOrderStatus(orderId, false);
   }
 };
 

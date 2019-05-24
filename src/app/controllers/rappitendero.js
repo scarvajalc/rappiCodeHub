@@ -2,6 +2,7 @@ const rappiTenderoHandler = require("./handlers/rappiTendero");
 const repository = require("../repository/index");
 const branchRepository = require("../repository/branch");
 const orderFunctions = require("../functions/order");
+const orderRepo = require("../repository/order");
 
 const rappiTenderoController = {
   async rappiTenderoLogin(req, res) {
@@ -35,6 +36,25 @@ const rappiTenderoController = {
       req
     );
     repository.rappiTenderoUpdateAddress(rappiTenderoAddress, res);
+  },
+
+  async rappiTenderoHome(req, res) {
+    if (
+      req.session.user &&
+      req.cookies.id &&
+      req.session.user_role === "rappiTendero"
+    ) {
+      orderInProgress = await orderRepo.userHaveOrderInProgress(
+        req.session.user.id,
+        "rappiTendero"
+      );
+      res.render("rappiTenderoHome", {
+        rappiTenderoName: req.session.user.first_name,
+        orderInProgress: orderInProgress
+      });
+    } else {
+      res.redirect("/rappiTenderoLogin");
+    }
   }
 
   /*async rappiTenderoGetClosest(req, res) {

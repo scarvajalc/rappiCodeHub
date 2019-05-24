@@ -36,8 +36,19 @@ const order = {
 
   async showOrderDetails(req, res) {
     let userId = req.session.user.id;
-    let orderData = await orderRepo.getOrderData(userId);
-    res.render("orderInProgress", orderData);
+    let role = req.session.user_role;
+    let orderData = await orderRepo.getOrderData(userId, role);
+    if (role == "client") {
+      res.render("orderInProgress", orderData);
+    } else {
+      res.render("orderAssigned", orderData);
+    }
+  },
+
+  async endOrder(req, res) {
+    let userId = req.session.user.id;
+    await orderRepo.endOrder(userId);
+    res.redirect("/rappiTenderoHome");
   },
 
   async prueba(req, res) {

@@ -14,4 +14,11 @@ module.exports = app => {
   app.get("/orderInProcess", (req, res) => {
     orderController.showOrderDetails(req, res);
   });
+  app.get("/orderAssigned", (req, res) => {
+    orderController.showOrderDetails(req, res);
+  });
+
+  app.get("/endOrder", (req, res) => {
+    orderController.endOrder(req, res);
+  });
 };

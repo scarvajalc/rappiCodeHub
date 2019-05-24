@@ -56,7 +56,8 @@ const clientController = {
         orderedOpenBranches = await branchController.getAllBranches(req, res);
       }
       orderInProgress = await orderRepo.userHaveOrderInProgress(
-        req.session.user.id
+        req.session.user.id,
+        "client"
       );
 
       res.render("clientHome", {

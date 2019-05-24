@@ -18,17 +18,7 @@ module.exports = app => {
   });
 
   app.get("/rappiTenderoHome", (req, res) => {
-    if (
-      req.session.user &&
-      req.cookies.id &&
-      req.session.user_role === "rappiTendero"
-    ) {
-      res.render("rappiTenderoHome", {
-        rappiTenderoName: req.session.user.first_name
-      });
-    } else {
-      res.redirect("/rappiTenderoLogin");
-    }
+    rappiTenderoController.rappiTenderoHome(req, res);
   });
 
   app.get("/rappiTenderoLogout", (req, res) => {
