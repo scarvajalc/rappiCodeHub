@@ -76,7 +76,7 @@
             </li>
             <% } %>
             <li class="nav-item">
-              <a href="/clientLogout" class="nav-link">Logout</a>
+              <a href="/clientLogout" class="nav-link">Cerrar Sesión</a>
             </li>
           </ul>
         </div>
@@ -96,7 +96,7 @@
             class="row slider-text align-items-center justify-content-center"
           >
             <div class="col-md-10 col-sm-12 ftco-animate text-center">
-              <h1 class="mb-3">Welcome <%= clientName %></h1>
+              <h1 class="mb-3">Bienvenido/a <%= clientName %></h1>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              Ingresar Ubicación
+              Ingresar Ubicación:
             </h5>
             <button
               type="button"
@@ -138,7 +138,7 @@
               id="pac-input"
               class="controls"
               type="text"
-              placeholder="Ingrese su ubicación"
+              placeholder="Ingresa tu ubicación"
             />
             <div id="map"></div>
           </div>
@@ -157,7 +157,7 @@
                 type="button"
                 class="btn btn-primary"
               >
-                Register
+                Registrar
               </button>
             </form>
           </div>
@@ -168,10 +168,10 @@
     <script>
       $("#registerAddress").click(function() {
         swal({
-          title: "Please Confirm Address",
+          title: "Por favor Confirma Tu Dirección",
           text: address,
           icon: "warning",
-          buttons: ["Return", "Confirm"]
+          buttons: ["Regresar", "Confirmar"]
         }).then(confirmed => {
           if (confirmed) {
             $.ajax({
@@ -185,8 +185,8 @@
             })
               .then(() => {
                 swal({
-                  title: "Location Saved!",
-                  text: "Now it is time to order",
+                  title: "Dirección Guardada!",
+                  text: "Ahora Es Tiempo De Ordenar",
                   icon: "success"
                 });
               })
@@ -200,7 +200,7 @@
 
       $("#address").click(function(e) {
         e.preventDefault();
-        swal("Your current location is", "<%= clientAddress %>");
+        swal("Tu Ubicación Actual:", "<%= clientAddress %>");
       });
     </script>
 
@@ -208,7 +208,7 @@
       <div class="container">
         <div class="row no-gutters justify-content-center mb-5 pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2>Restaurantes</h2>
+            <h2>Listado De Los Mejores Restaurantes</h2>
           </div>
         </div>
         <div class="row d-flex no-gutters">
