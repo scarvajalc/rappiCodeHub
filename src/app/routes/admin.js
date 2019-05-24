@@ -47,4 +47,20 @@ module.exports = app => {
       res.redirect("/adminLogin");
     }
   });
+
+  app.get("/adminRegisterRestaurantChains", (req, res) => {
+    if (
+      req.session.user &&
+      req.cookies.id &&
+      req.session.user_role === "admin"
+    ) {
+      res.render("adminRegisterRestaurantChains");
+    } else {
+      res.redirect("/adminLogin");
+    }
+  });
+
+  app.post("/admins/registerRestaurantChains", (req, res) => {
+    adminController.adminRegisterRestaurantChains(req, res);
+  });
 };
