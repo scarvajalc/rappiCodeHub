@@ -6,6 +6,15 @@ const adminHandler = {
     };
 
     return adminData;
+  },
+
+  handleHTTPRegisterRestaurantChains(req) {
+    const restaurantChainsData = {
+      nit: req.body.nit,
+      name: req.body.name
+    };
+
+    return restaurantChainsData;
   }
 };
 

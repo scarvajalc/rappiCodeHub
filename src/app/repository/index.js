@@ -5,6 +5,7 @@ const ClientAddress = require("../models/client_addresses");
 const CartProduct = require("../models/cartProducts");
 const Cart = require("../models/cart");
 const Product = require("../models/product");
+const RestaurantChain = require("../models/restaurantchain");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -211,6 +212,12 @@ const repository = {
         client_id: clientId
       }
     }));
+  },
+
+  async registerRestaurantChains(restaurantChainsData) {
+    return (registeredRestaurantChain = await RestaurantChain.create(
+      restaurantChainsData
+    ));
   }
 };
 

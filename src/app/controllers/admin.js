@@ -12,6 +12,20 @@ const adminController = {
     } else {
       res.redirect("/adminLogin");
     }
+  },
+
+  async adminRegisterRestaurantChains(req, res) {
+    const restaurantChainsData = adminHandler.handleHTTPRegisterRestaurantChains(
+      req
+    );
+    const createdRestaurantChains = repository.registerRestaurantChains(
+      restaurantChainsData
+    );
+    if (createdRestaurantChains) {
+      res.redirect("/adminHome");
+    } else {
+      res.redirect("/adminLogin");
+    }
   }
 };
 
