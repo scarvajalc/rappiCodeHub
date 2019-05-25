@@ -28,7 +28,9 @@ const branchHandle = {
       longitude: req.body.latitude,
       url_image: req.body.url_image,
       createdAt: today,
-      active: true
+      active: true,
+      opening_time: req.body.opening_time,
+      closing_time: req.body.closing_time
     };
 
     return branchData;
