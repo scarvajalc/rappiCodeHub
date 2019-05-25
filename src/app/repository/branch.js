@@ -216,6 +216,14 @@ const branchRepository = {
       opening_time,
       closing_time
     }));
+  },
+
+  async getAllBranches() {
+    return Branch.findAll({
+      where: {
+        active: true
+      }
+    });
   }
 };
 
