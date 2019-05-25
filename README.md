@@ -31,6 +31,13 @@ npm start || npm run dev
 - The administrator email to login is: jsebastian@admin.com
 - All RappiTenderos are created by the Administrator
 
+There is an important order to create the Restaurant Chain - Stores and Products:
+
+1. The admin must register a RestaurantChain
+2. The admin must register a Store
+3. The admin must register a Product
+4. The admin must associated Products to a Store
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
