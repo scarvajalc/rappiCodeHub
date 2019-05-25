@@ -16,6 +16,22 @@ const branchHandle = {
       });
     }
     return cartProductsData;
+  },
+
+  handleHTTPAdminRegisterBranch(req) {
+    const today = new Date();
+    const branchData = {
+      restaurantchain_id: req.body.restaurantchain_id,
+      name: req.body.name,
+      address: req.body.address,
+      latitude: req.body.latitude,
+      longitude: req.body.latitude,
+      url_image: req.body.url_image,
+      createdAt: today,
+      active: true
+    };
+
+    return branchData;
   }
 };
 
