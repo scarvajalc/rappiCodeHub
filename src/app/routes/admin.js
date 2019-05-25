@@ -95,4 +95,20 @@ module.exports = app => {
   app.post("/admins/registerProducts", (req, res) => {
     adminController.adminRegisterProducts(req, res);
   });
+
+  app.get("/adminAssociateProductsToBranch", (req, res) => {
+    if (
+      req.session.user &&
+      req.cookies.id &&
+      req.session.user_role === "admin"
+    ) {
+      adminController.adminAssociateProductsToBranchView(req, res);
+    } else {
+      res.redirect("/adminLogin");
+    }
+  });
+
+  app.post("/admins/adminAssociatedProductsToBranch", (req, res) => {
+    adminController.adminAssociateProductsToBranch(req, res);
+  });
 };
