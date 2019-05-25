@@ -38,6 +38,20 @@ There is an important order to create the Restaurant Chain - Stores and Products
 3. The admin must register a Product
 4. The admin must associated Products to a Store
 
+## .ENV Variables
+
+These are all the needed env variables for the app to work:
+
+DB_NAME = ''
+DB_USER = ''
+DB_PASS = ''
+DB_HOST = ''
+SECRET_KEY = ''
+SESSION_SECRET = ''
+PAYPAL_MODE = ''
+PAYPAL_CLIENT_ID = ''
+PAYPAL_CLIENT_SECRET = ''
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
