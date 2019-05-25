@@ -71,10 +71,28 @@ module.exports = app => {
       req.session.user_role === "admin"
     ) {
       adminController.adminRegisterBranchView(req, res);
+    } else {
+      res.redirect("/adminLogin");
     }
   });
 
   app.post("/admins/registerBranch", (req, res) => {
     adminController.adminRegisterBranch(req, res);
+  });
+
+  app.get("/adminRegisterProducts", (req, res) => {
+    if (
+      req.session.user &&
+      req.cookies.id &&
+      req.session.user_role === "admin"
+    ) {
+      adminController.adminRegisterProductsView(req, res);
+    } else {
+      res.redirect("/adminLogin");
+    }
+  });
+
+  app.post("/admins/registerProducts", (req, res) => {
+    adminController.adminRegisterProducts(req, res);
   });
 };

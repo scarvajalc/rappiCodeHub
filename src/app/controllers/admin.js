@@ -3,6 +3,8 @@ const repository = require("../repository/index");
 const restaurantChainRepository = require("../repository/restaurantChain");
 const branchHandler = require("./handlers/branch");
 const branchRepository = require("../repository/branch");
+const productHandler = require("./handlers/product");
+const productRepository = require("../repository/product");
 
 const adminController = {
   async adminLogin(req, res) {
@@ -42,6 +44,20 @@ const adminController = {
     const branchData = branchHandler.handleHTTPAdminRegisterBranch(req);
     const registeredBranch = branchRepository.registerBranch(branchData);
     if (registeredBranch) {
+      res.redirect("/adminHome");
+    } else {
+      res.redirect("/adminLogin");
+    }
+  },
+
+  async adminRegisterProductsView(req, res) {
+    res.render("adminRegisterProducts");
+  },
+
+  async adminRegisterProducts(req, res) {
+    const productData = productHandler.handleHTTPRegisterProduct(req);
+    const registeredProduct = productRepository.registerProduct(productData);
+    if (registeredProduct) {
       res.redirect("/adminHome");
     } else {
       res.redirect("/adminLogin");
