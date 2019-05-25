@@ -184,7 +184,38 @@ const branchRepository = {
   },
 
   async registerBranch(branchData) {
-    return Branch.create(branchData);
+    const {
+      restaurantchain_id,
+      name,
+      address,
+      latitude,
+      longitude,
+      url_image,
+      createdAt,
+      active,
+      opening_time,
+      closing_time
+    } = branchData;
+    const registeredBranch = await Branch.create({
+      restaurantchain_id,
+      name,
+      address,
+      latitude,
+      longitude,
+      url_image,
+      createdAt,
+      active
+    });
+
+    const branch_id = registeredBranch.dataValues.id;
+
+    return (registeredBranchWithTimeSchedule = await OpeningHour.create({
+      branch_id,
+      createdAt,
+      active,
+      opening_time,
+      closing_time
+    }));
   }
 };
 
