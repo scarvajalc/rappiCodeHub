@@ -63,4 +63,18 @@ module.exports = app => {
   app.post("/admins/registerRestaurantChains", (req, res) => {
     adminController.adminRegisterRestaurantChains(req, res);
   });
+
+  app.get("/adminRegisterBranch", (req, res) => {
+    if (
+      req.session.user &&
+      req.cookies.id &&
+      req.session.user_role === "admin"
+    ) {
+      adminController.adminRegisterBranchView(req, res);
+    }
+  });
+
+  app.post("/admins/registerBranch", (req, res) => {
+    adminController.adminRegisterBranch(req, res);
+  });
 };
