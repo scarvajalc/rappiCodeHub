@@ -181,6 +181,10 @@ const branchRepository = {
     }
 
     return productsAvailable;
+  },
+
+  async registerBranch(branchData) {
+    return Branch.create(branchData);
   }
 };
 
