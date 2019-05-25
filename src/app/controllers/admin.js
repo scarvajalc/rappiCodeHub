@@ -5,6 +5,8 @@ const branchHandler = require("./handlers/branch");
 const branchRepository = require("../repository/branch");
 const productHandler = require("./handlers/product");
 const productRepository = require("../repository/product");
+const branchProductRepository = require("../repository/branchProductRepository");
+const branchProductHandler = require("./handlers/branchProduct");
 
 const adminController = {
   async adminLogin(req, res) {
@@ -58,6 +60,33 @@ const adminController = {
     const productData = productHandler.handleHTTPRegisterProduct(req);
     const registeredProduct = productRepository.registerProduct(productData);
     if (registeredProduct) {
+      res.redirect("/adminHome");
+    } else {
+      res.redirect("/adminLogin");
+    }
+  },
+
+  async adminAssociateProductsToBranchView(req, res) {
+    const allBranches = await branchRepository.getAllBranches();
+    const allProducts = await productRepository.getAllProducts();
+    if (allBranches && allProducts) {
+      res.render("adminAssociateProductsToBranch", {
+        branches: allBranches,
+        products: allProducts
+      });
+    } else {
+      res.redirect("/adminLogin");
+    }
+  },
+
+  async adminAssociateProductsToBranch(req, res) {
+    const branchProductsData = branchProductHandler.handleHTTPAssociateBranchProduct(
+      req
+    );
+    const associatedBranchProduct = branchProductRepository.associateBranchProduct(
+      branchProductsData
+    );
+    if (associatedBranchProduct) {
       res.redirect("/adminHome");
     } else {
       res.redirect("/adminLogin");
