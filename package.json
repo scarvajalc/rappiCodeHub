@@ -22,7 +22,7 @@
     "paypal-rest-sdk": "^1.8.1",
     "pg": "^7.9.0",
     "postgresql": "0.0.1",
-    "sequelize": "^5.2.8"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
